@@ -10,9 +10,11 @@
 
 ## Architecture Health Check
 
-After approximately every 10 task sessions, run the architecture health check:
+The architecture health check is triggered automatically: when you ask Claude to generate a task prompt and the Task Counter in `status.md` has reached 10, it generates the architecture check prompt instead. You do not need to track this manually.
+
+If you want to run the check manually:
 
 1. Open a new session.
 2. Paste the contents of `project_management/prompts/architecture-check.md` as the prompt.
 3. Claude will map the current architecture, run forbidden pattern checks, compare to the stored baseline, and produce a verdict.
-4. If the verdict is PASS or PASS WITH NOTES, Claude updates the baseline. If FAIL, fix the violations before the next session.
+4. If the verdict is PASS or PASS WITH NOTES, Claude updates the baseline and resets the counter. If FAIL, fix the violations before the next session.

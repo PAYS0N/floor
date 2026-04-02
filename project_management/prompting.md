@@ -1,5 +1,7 @@
 <!-- Template file. Customize: replace the cdoc routing table with rows matching your project's actual domains and context documents. The instructions above and below the table are universal and should be kept as-is. -->
 
+Before composing the prompt: check the Task Counter in `project_management/status.md`. If the counter is 10 or greater, generate the architecture check prompt from `project_management/prompts/architecture-check.md` instead of a task prompt. Do not proceed with the steps below.
+
 Compose a prompt for a new session task to do the indicated work item.
 Include all the context someone would need, both practical code files and cdocs.
 The prompt should always include an instruction to read project_management/manifest.md.
@@ -21,7 +23,7 @@ The prompt should indicate the following workflow item in addition to the task d
 
 - Run this checklist after the user has declared the task done (make it clear to run this after completion is externally confirmed, not when it thinks it's done.):
 
-    1. **status.md** — remove the item from Open; add any newly discovered open items.
+    1. **status.md** — remove the item from Open; add any newly discovered open items; increment the Task Counter by 1.
     2. **manifest.md** — add a row for every new file created; remove rows for deleted files.
     3. **context docs** — Read cdoc.md. Update appropriate context documents.
     4. **response to user** - Remind the user to make a git commit

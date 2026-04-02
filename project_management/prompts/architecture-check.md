@@ -75,3 +75,5 @@ Do not update the baseline when the verdict is FAIL.
 Overwrite `project_management/architecture-baseline.md` with the newly generated diagram and updated Module Summary table. Set the "Generated" date to today.
 
 If the verdict is PASS WITH NOTES, add a "Ratified Changes" section to the baseline listing what changed and why.
+
+Reset the Task Counter in `project_management/status.md` to 0.
