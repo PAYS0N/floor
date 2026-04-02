@@ -1,6 +1,20 @@
-<!-- Template file. Customize: replace placeholder layer names, module names, and check commands with your project's actual structure. Keep the three section headers and the rule format. -->
+<!-- Template file. Customize: replace placeholder layer names, module names, and check commands with your project's actual structure. To disable a universal rule, move it to the "Disabled Universal Rules" section at the bottom with a rationale. -->
 
 # Architecture Conventions: [PROJECT NAME]
+
+## Universal Rules
+
+These apply to all projects by default. To disable one, move it to the "Disabled Universal Rules" section at the bottom of this file with a written rationale.
+
+- **Single responsibility per module** — Every file/module owns one concern. If you can't describe what it does in one sentence without "and", split it.
+- **Dependency direction is inward/downward** — High-level modules do not import from low-level modules. The project-specific layer table below defines what "inward/downward" means for this codebase.
+- **No circular dependencies** — No module may import from a module that (directly or transitively) imports it.
+- **Explicit imports, no implicit coupling** — When a module needs something from another module, it imports it explicitly. No global mutable state, no shared mutable singletons, no coupling through side channels.
+- **Public interfaces have at least one test** — Every public function, method, or API endpoint has at least one test exercising it. Internal helpers may be tested indirectly through their callers.
+- **No side effects at import time** — Importing a module does not trigger behavior. Initialization happens explicitly.
+- **Separate I/O from logic** — Pure computation should be separable from I/O (file, network, user input). If the agent needs to violate this (e.g. embedded ISR handlers, performance-critical paths), it must note the exception and get confirmation.
+
+---
 
 ## Module Hierarchy
 
@@ -71,3 +85,11 @@ When creating a new source file:
 3. Give it a single clear responsibility that doesn't overlap with existing modules.
 4. Update the module hierarchy table in this document.
 5. Update `project_management/architecture-baseline.md` with the new dependency.
+
+---
+
+## Disabled Universal Rules
+
+<!-- If you disabled any universal rule during setup, move it here with a rationale. Example:
+- **No side effects at import time** — Disabled because [this project uses module-level registration for plugin discovery].
+-->

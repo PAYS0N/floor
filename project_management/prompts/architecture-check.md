@@ -2,10 +2,6 @@
 
 # Architecture Health Check Prompt
 
-Run this prompt every 10–15 commits to validate architectural integrity.
-
----
-
 Read `project_management/manifest.md` before proceeding.
 
 ## Task

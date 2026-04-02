@@ -1,62 +1,69 @@
 # Template Setup Checklist
 
-Complete every item below before using this template. Items are ordered by file.
+Complete the **Setup Now** items before using this template. **Setup When Needed** items can wait until your project reaches the complexity that demands them.
+
+When a setup task is complete, delete all setup related comments in that file.
 
 ---
 
-## CLAUDE.md
+## Setup Now
+
+### CLAUDE.md
 
 - [ ] **Project summary block** — Replace `[PROJECT NAME] is a [brief description].` with one sentence describing your project.
 
----
+### project_management/manifest.md
 
-## project_management/manifest.md
+- [ ] **Project Files section** — Replace the empty table with rows for your actual project files. Add section headers (## headings) to group files as the project grows.
 
-- [ ] **Project title** — Replace the `# Project Manifest` title if you want the project name in the heading.
-- [ ] **Entry Point section** — Replace `[src/entryPoint]` with your actual entry point file and a real description.
-- [ ] **Source Modules section** — Replace the placeholder rows with your actual source files. Add one row per file; remove any rows that don't apply. Group files into sections that make sense for your project structure.
-- [ ] **Project Context section** — Keep as-is. All listed files exist in every project using this template.
+### project_management/standards/style.md
 
----
-
-## project_management/prompting.md
-
-- [ ] **cdoc routing table** — Replace the three placeholder rows (`[Domain A]`, `[Domain B]`, `[Domain C]`) with rows matching your project's actual domains and context documents. Add as many rows as you have distinct areas of the codebase. Each row should name a coherent topic and point to the cdoc(s) that cover it. (cdocs themselves are created later, as needed — don't create them speculatively at setup time.)
-
----
-
-## project_management/standards/style.md
-
+- [ ] **Project name** — Replace `[PROJECT NAME]` in the heading.
 - [ ] **Language & Tooling** — Fill in your language, build command, lint/format command, source directory, and output directory.
-- [ ] **Naming Conventions** — Replace each `[IdentifierType]: [convention]` placeholder with your actual casing rules.
+- [ ] **Naming Conventions** — Replace each placeholder with your actual casing rules.
 - [ ] **Formatting** — Replace placeholder rules with your indentation style, brace conventions, etc.
 - [ ] **Type Safety** — Fill in how your project uses types, annotations, and guards.
 - [ ] **Error Handling** — Document your error propagation strategy and validation boundaries.
-- [ ] **Serialization** — Describe your save/load or encode/decode format and conventions, or remove this section if not applicable.
+- [ ] **Serialization** — Describe your save/load format, or remove this section if not applicable.
 - [ ] **Build & Lint Gate** — Replace `[lint command]` and `[build command]` with your actual commands.
+- [ ] **Universal rules** — Review the Universal Rules section. For any rule that does not apply to this project, move it to the "Disabled Universal Rules" section at the bottom of the file with a written rationale.
 
----
+### project_management/standards/architecture.md
 
-## project_management/standards/architecture.md
-
-- [ ] **Module Hierarchy table** — Replace placeholder layer names and module names (`[entryPoint]`, `[orchestrator]`, etc.) with your actual modules. Add or remove layers as needed.
+- [ ] **Project name** — Replace `[PROJECT NAME]` in the heading.
+- [ ] **Module Hierarchy table** — Replace placeholder layer names and module names with your actual modules. Add or remove layers as needed.
 - [ ] **Module Responsibilities** — Replace each bullet with a real description of each module's single concern.
-- [ ] **Forbidden Patterns (F1–F4)** — Replace each `[Pattern name]`, description, and `[your check command]` with your project's actual forbidden patterns and the commands used to verify them. Keep F5 (no circular dependencies) as-is.
-- [ ] **State / Data Mutation Rules** — Replace `[State A/B/C]` and module placeholders with your actual shared state and the modules that own mutation rights.
+- [ ] **Forbidden Patterns (F1–F4)** — Replace each placeholder with your project's actual forbidden patterns and check commands. Keep F5 (no circular dependencies) as-is.
+- [ ] **State / Data Mutation Rules** — Replace placeholders with your actual shared state and the modules that own mutation rights.
+- [ ] **Universal rules** — Review the Universal Rules section. For any rule that does not apply to this project, move it to the "Disabled Universal Rules" section at the bottom of the file with a written rationale.
 
 ---
 
-## project_management/prompts/architecture-check.md
+## Setup When Needed
+
+These items become relevant as the project grows. Don't create them speculatively.
+
+### Context documents (cdocs)
+
+Create your first cdoc when a module or domain becomes complex enough that a new Claude session would need background to work on it effectively. Follow `project_management/cdoc.md` — it handles adding the routing table row in `prompting.md` automatically.
+
+### project_management/prompting.md
+
+- [ ] **cdoc routing table** — Populated automatically as you create cdocs. No upfront setup needed. If you want to pre-plan your domains, replace the placeholder rows with your expected areas, but this is optional.
+
+### project_management/prompts/architecture-check.md
+
+Customize when you're ready to run your first architecture health check (typically after 10+ tasks or when the codebase has enough modules to warrant it).
 
 - [ ] **Project name** — Replace `[PROJECT NAME]` in the Task section.
-- [ ] **`[your source dir]`** — Replace with your actual source directory (e.g. `src/`).
-- [ ] **`[shared resource]`** and relevant API patterns (Step 2) — Describe what counts as "accessing a shared resource" in your codebase (e.g. DOM access, database calls, file I/O).
+- [ ] **`[your source dir]`** — Replace with your actual source directory.
+- [ ] **`[shared resource]`** and relevant API patterns (Step 2) — Describe what counts as "accessing a shared resource" in your codebase.
 - [ ] **`[key state fields]`** (Step 2) — List the shared state fields that count as mutations.
-- [ ] **F1–F4 check commands** (Step 4) — Replace each `[your check command]` with the actual commands from your architecture.md Forbidden Patterns section.
+- [ ] **F1–F4 check commands** (Step 4) — Replace with the actual commands from your architecture.md Forbidden Patterns section.
 - [ ] **`[your lint command]` and `[your build command]`** (Step 5) — Replace with your actual commands.
 
 ---
 
 ## Done
 
-Once all items above are complete, delete this file.
+Once all **Setup Now** items are complete, delete this file. (The **Setup When Needed** items are self-documenting in their respective files.)
