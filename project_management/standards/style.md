@@ -1,6 +1,4 @@
-<!-- Template file. Customize: fill in each project-specific section with your conventions. To disable a universal rule, move it to the "Disabled Universal Rules" section at the bottom with a rationale. -->
-
-# Style Guide: [PROJECT NAME]
+# Style Guide: Floor
 
 ## Universal Rules
 
@@ -26,62 +24,41 @@ These apply to all projects by default. To disable one, move it to the "Disabled
 
 ## Language & Tooling
 
-<!-- Describe the language, compiler/interpreter, build tool, linter/formatter, and output structure. -->
-
-- Language: [e.g. TypeScript, Python, Go]
-- Build command: [e.g. `npm run build`]
-- Lint/format command: [e.g. `npx biome check src/`]
-- Source directory: [e.g. `src/`]
-- Output directory: [e.g. `dist/`]
+- Languages: Markdown (documentation/templates), Bash (scripts)
+- Build command: None yet
+- Lint/format command: None yet
+- Source directory: `floor/` (template files distributed to new projects)
+- Output directory: N/A
 
 ## Naming Conventions
 
-<!-- Document casing and naming rules for each identifier type. -->
-
-- [IdentifierType]: [convention] — e.g. Classes: PascalCase
-- [IdentifierType]: [convention] — e.g. Functions and variables: camelCase
-- [IdentifierType]: [convention] — e.g. Constants: UPPER_SNAKE_CASE
+- Files: lowercase kebab-case (e.g. `architecture-check.md`)
+- Directories: lowercase with underscores for multi-word (e.g. `project_management/`)
+- Bash variables: UPPER_SNAKE_CASE for exported/environment, lower_snake_case for local
+- Bash functions: lower_snake_case
 
 ## Formatting
 
-<!-- Document indentation, line length, brace style, and other formatting rules. -->
-
-- Indentation: [tabs / N spaces]
-- [Rule]: [description] — e.g. Opening braces on the same line as the declaration
-- [Rule]: [description] — e.g. Single blank line between methods
+- Indentation: 2 spaces for Bash scripts, no indentation convention for Markdown
+- Markdown headings: ATX-style (`##`), single blank line before and after
+- Bash: Opening braces/`then`/`do` on the same line as the statement
 
 ## Type Safety
 
-<!-- Document how types are used: annotations, inference, type guards, generics, etc. -->
-
-- [Rule]: [description] — e.g. All public method parameters and return types are explicitly annotated
-- [Rule]: [description] — e.g. Use type guards before narrowing from unknown
+Not applicable — no typed language in use.
 
 ## Error Handling
 
-<!-- Document the error handling strategy: exceptions, result types, propagation, user-facing behavior. -->
+- Bash scripts: Use `set -euo pipefail` at the top of every script
+- Validate inputs at the start of scripts; fail with a clear error message
 
-- [Rule]: [description] — e.g. Errors propagate to the top level; no silent swallowing
-- [Rule]: [description] — e.g. Validate at system boundaries (user input, external APIs) only
+## Prompts & Agent Context
 
-## Serialization
-
-<!-- Document the save/load or encode/decode format and conventions. Remove this section if not applicable. -->
-
-- [Rule]: [description] — e.g. All serializable types implement a `toJSON()` method returning a plain object
-- [Rule]: [description] — e.g. Deserialization includes explicit type guards before each field assignment
+- **Minimum necessary context** — An agent should only be exposed to the files and information it needs for its task. Do not load the entire project into every prompt.
+- **Self-contained prompts** — A prompt must either contain all the information the agent needs or explicitly direct the agent to gather it (e.g. "read file X before proceeding"). Never assume the agent has prior context.
+- **No implicit knowledge** — If a prompt depends on conventions, definitions, or decisions documented elsewhere, either inline the relevant details or include a read directive. The agent cannot recall what it has not been given.
+- **Scope matches task** — The breadth of context given to an agent should be proportional to the task. A focused bug fix gets a narrow slice; an architecture review gets the full standards.
 
 ## Build & Lint Gate
 
-<!-- Document what must pass before a change is considered complete. -->
-
-- After any complete code change, run [lint command] and [build command]. Both must pass.
-- When the linter or compiler flags an issue, fix the underlying problem — do not suppress or work around it.
-
----
-
-## Disabled Universal Rules
-
-<!-- If you disabled any universal rule during setup, move it here with a rationale. Example:
-- **DRY** — Disabled because [this firmware project requires inlined ISR handlers for timing guarantees].
--->
+- No automated linting or build steps yet. When tooling is added, update this section.

@@ -1,12 +1,10 @@
-<!-- Template file. Customize: replace [your source dir], [your modules], and [your check command] with your project's actual paths and commands. Steps 1-8 and the verdict format are universal and should be kept as-is. -->
-
 # Architecture Health Check Prompt
 
 Read `project_management/manifest.md` before proceeding.
 
 ## Task
 
-Perform a full architectural health check on the [PROJECT NAME] codebase. Present all findings before making any changes.
+Perform a full architectural health check on the Floor project. Present all findings before making any changes.
 
 ### Step 1 — Read Standards
 
@@ -16,38 +14,31 @@ If no baseline exists yet, note that this run will produce the initial baseline 
 
 ### Step 2 — Map Current Architecture
 
-Read every file in `[your source dir]`. For each file, record:
-- All import statements (what it imports and from where)
-- Whether it accesses `[shared resource]` (calls to [relevant APIs or patterns])
-- Whether it mutates shared state (writes to [key state fields])
+Read every file in `floor/`. For each file, record:
+- All references to other files (e.g. "read X", links, directives)
+- Whether it modifies shared state (`status.md`, `manifest.md`, template files in `floor/`)
 - Its approximate line count
 
 ### Step 3 — Generate Current Diagram
 
-From the import map, produce a Mermaid dependency graph in the same format as the baseline in `architecture-baseline.md`. Include all four diagram sections: Module Dependency Graph, Layered Architecture, Resource Access Boundary, State Mutation Flow. Update the Module Summary table.
+From the reference map, produce a Mermaid dependency graph in the same format as the baseline in `architecture-baseline.md`, if it exists. Include all four diagram sections: Module Dependency Graph, Layered Architecture, Reference Boundary, State Mutation Flow. Update the Module Summary table.
 
 ### Step 4 — Run Forbidden Pattern Checks
 
-Execute each check command listed in the "Forbidden Patterns" section of `architecture.md`. Report pass/fail for each:
-
-- **F1**: `[your check command]` — should return nothing
-- **F2**: `[your check command]` — should return nothing
-- **F3**: `[your check command]` — should return nothing
-- **F4**: `[your check command]` — should return results only in `[allowed module]`
-- **F5**: Review import graph for cycles
+No forbidden patterns yet. Skip this step.
 
 ### Step 5 — Run Build & Lint
 
-Run `[your lint command]` and `[your build command]`. Report any errors or warnings.
+No automated build or lint commands yet. Skip this step until tooling is added.
 
 ### Step 6 — Compare to Baseline
 
 If a baseline exists, diff the current diagram against it. Flag:
-- New dependencies (imports that didn't exist in the baseline)
-- Removed dependencies
-- New modules or removed modules
-- Any dependency that violates the layer hierarchy (upward import)
-- Any module whose responsibility has shifted (e.g., a read-only module now mutating state)
+- New references (file-to-file links that didn't exist in the baseline)
+- Removed references
+- New files or removed files
+- Any reference that violates the layer hierarchy (upward reference)
+- Any file whose responsibility has shifted
 
 If no baseline exists, note that this is the initial run and skip this step.
 
@@ -57,11 +48,11 @@ Produce a verdict:
 
 **PASS** — No violations found. Architecture matches conventions. Update the baseline date.
 
-**PASS WITH NOTES** — No violations, but there are new dependencies or structural changes that are intentional and conform to conventions. List the changes. Update the baseline to reflect them.
+**PASS WITH NOTES** — No violations, but there are new references or structural changes that are intentional and conform to conventions. List the changes. Update the baseline to reflect them.
 
 **FAIL** — One or more violations found. List each violation with:
 - Which rule was broken (reference the F-number or convention)
-- Which file and line
+- Which file
 - Suggested fix
 
 Do not update the baseline when the verdict is FAIL.

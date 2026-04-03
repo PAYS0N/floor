@@ -1,8 +1,10 @@
+<!-- Template file. Customize: replace the Project Summary block with your project's name and description. All rules below are universal and should be kept as-is. -->
+
 ## Project Summary
 
 Read project_management/manifest.md.
 
-Floor is a project management template system for AI-assisted software development, providing structured conventions, standards, and prompts that give Claude consistent context across sessions.
+[PROJECT NAME] is a [brief description].
 
 
 ## Project Rules

@@ -1,5 +1,3 @@
-<!-- Template file. Customize: replace the placeholder rows below the Project Context section with your actual project files. Keep the Project Context section intact — those files exist in every project using this template. Add section headers (## headings) to group files as your project grows. -->
-
 # Project Manifest
 
 ---
@@ -16,12 +14,21 @@
 | [project_management/standards/style.md](standards/style.md) | Coding conventions: universal rules, naming, formatting, error handling, and build gate |
 | [project_management/standards/architecture.md](standards/architecture.md) | Architecture conventions: universal rules, module hierarchy, forbidden patterns, state mutation rules |
 | [project_management/prompts/architecture-check.md](prompts/architecture-check.md) | Periodic health check prompt: map current architecture, run forbidden pattern checks, compare to baseline, produce verdict |
+| [project_management/architecture-baseline.md](architecture-baseline.md) | Architecture dependency graph snapshot; updated on each health check pass |
+| [project_management/cdocs/floor-system.md](cdocs/floor-system.md) | Context document: what Floor is, its structure, key design decisions, and boundaries |
 
 ---
 
-## Project Files
-
-<!-- Add rows for every source file, config file, test file, etc. in your project. Group into sections (## headings) when the table gets long — e.g. "## Source", "## Tests", "## Config". -->
+## Template Files
 
 | File | Description |
 |------|-------------|
+| [floor/CLAUDE.md](../floor/CLAUDE.md) | Template CLAUDE.md distributed to new projects |
+| [floor/setup.md](../floor/setup.md) | Setup checklist for new projects using this template |
+| [floor/project_management/manifest.md](../floor/project_management/manifest.md) | Template manifest file |
+| [floor/project_management/status.md](../floor/project_management/status.md) | Template status tracking file |
+| [floor/project_management/cdoc.md](../floor/project_management/cdoc.md) | Template instructions for context documents |
+| [floor/project_management/prompting.md](../floor/project_management/prompting.md) | Template instructions for task prompts |
+| [floor/project_management/standards/style.md](../floor/project_management/standards/style.md) | Template style guide |
+| [floor/project_management/standards/architecture.md](../floor/project_management/standards/architecture.md) | Template architecture conventions |
+| [floor/project_management/prompts/architecture-check.md](../floor/project_management/prompts/architecture-check.md) | Template architecture health check prompt |

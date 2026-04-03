@@ -1,3 +1,5 @@
+<!-- Template file. Customize: replace the cdoc routing table with rows matching your project's actual domains and context documents. The instructions above and below the table are universal and should be kept as-is. -->
+
 Before composing the prompt: check the Task Counter in `project_management/status.md`. If the counter is 10 or greater, generate the architecture check prompt from `project_management/prompts/architecture-check.md` instead of a task prompt. Do not proceed with the steps below.
 
 Compose a prompt for a new session task to do the indicated work item.
@@ -7,7 +9,11 @@ The prompt should include only the cdocs relevant to the task — do not load al
 
 | Task involves... | Load these cdocs |
 |-----------------|-----------------|
-| Template structure, design decisions, what Floor is/isn't | `cdocs/floor-system.md` |
+| [Domain A — e.g. core data model / state] | `cdocs/[relevant-doc-a].md` |
+| [Domain B — e.g. rendering / output layer] | `cdocs/[relevant-doc-b].md` |
+| [Domain C — e.g. persistence / serialization] | `cdocs/[relevant-doc-c].md` |
+
+<!-- Add one row per domain in your project. Each row should name a coherent area of the codebase and point to the cdoc(s) that capture it. -->
 
 Where applicable, the prompt should indicate that project_management/standards/style.md should be followed when coding.
 Where the task involves creating new files, adding imports, or changing module responsibilities, the prompt should indicate that project_management/standards/architecture.md should be read before planning.
