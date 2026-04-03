@@ -37,6 +37,10 @@ When a setup task is complete, delete all setup related comments in that file.
 - [ ] **State / Data Mutation Rules** — Replace placeholders with your actual shared state and the modules that own mutation rights.
 - [ ] **Universal rules** — Review the Universal Rules section. For any rule that does not apply to this project, move it to the "Disabled Universal Rules" section at the bottom of the file with a written rationale.
 
+### scripts/forbidden-patterns.sh
+
+- [ ] **F1–F4 check commands** — Replace each `[your check command]` and `[Pattern name]` with the actual values from your `project_management/standards/architecture.md` Forbidden Patterns section. If you have a tool for circular dependency detection, replace the F5 line with a `run_check` call.
+
 ---
 
 ## Setup When Needed
