@@ -9,9 +9,7 @@ The prompt should include only the cdocs relevant to the task — do not load al
 
 | Task involves... | Load these cdocs |
 |-----------------|-----------------|
-| [Domain A — e.g. core data model / state] | `cdocs/[relevant-doc-a].md` |
-| [Domain B — e.g. rendering / output layer] | `cdocs/[relevant-doc-b].md` |
-| [Domain C — e.g. persistence / serialization] | `cdocs/[relevant-doc-c].md` |
+| [Replace with your top-level domain — e.g. core system / data model] | `cdocs/project-overview.md` |
 
 <!-- Add one row per domain in your project. Each row should name a coherent area of the codebase and point to the cdoc(s) that capture it. -->
 

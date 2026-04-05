@@ -20,7 +20,8 @@ The template ships these file groups:
 - **Templates are the product.** Changes to files in `floor/` are what ship. The root-level management files describe and support them.
 - **Minimum viable context.** Prompts should give agents only what they need. This is both a design principle and a documented style rule.
 - **Forbidden patterns grow organically.** Only F5 (no circular references) is defined. F1–F4 will be added as anti-patterns emerge from real usage.
-- **Setup-then-delete.** New projects run `setup.md` to customize placeholders, then delete it. The template files retain "Setup When Needed" comments for items that can wait.
+- **Setup-then-delete.** New projects run `setup.md` to customize placeholders, then delete it. Setup is considered complete — not partially deferred — when the checklist is done.
+- **First cdoc is required at setup.** The template ships `project_management/cdocs/project-overview.md` as a placeholder. Setup requires filling it in and updating the routing table in `prompting.md`. This ensures a new project is never in a broken state with an empty cdoc list or unpopulated routing table.
 
 ## What Floor Does Not Do
 

@@ -32,3 +32,4 @@
 | [floor/project_management/standards/style.md](../floor/project_management/standards/style.md) | Template style guide |
 | [floor/project_management/standards/architecture.md](../floor/project_management/standards/architecture.md) | Template architecture conventions |
 | [floor/project_management/prompts/architecture-check.md](../floor/project_management/prompts/architecture-check.md) | Template architecture health check prompt |
+| [floor/project_management/cdocs/project-overview.md](../floor/project_management/cdocs/project-overview.md) | Template starter cdoc with placeholder project name and description |

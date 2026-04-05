@@ -1,8 +1,6 @@
 # Template Setup Checklist
 
-Complete the **Setup Now** items before using this template. **Setup When Needed** items can wait until your project reaches the complexity that demands them.
-
-When a setup task is complete, delete all setup related comments in that file.
+Complete all items below before using this template. When a setup task is complete, delete all setup-related comments in that file.
 
 ---
 
@@ -12,9 +10,14 @@ When a setup task is complete, delete all setup related comments in that file.
 
 - [ ] **Project summary block** — Replace `[PROJECT NAME] is a [brief description].` with one sentence describing your project.
 
-### project_management/manifest.md
+### project_management/cdocs/project-overview.md
 
-- [ ] **Project Files section** — Replace the empty table with rows for your actual project files. Add section headers (## headings) to group files as the project grows.
+- [ ] **Project name** — Replace `[Project Name]` in the heading and the Name field.
+- [ ] **Description** — Replace the two placeholder sentences with at least two real sentences. For example: what the project does, and who it's for or what problem it solves.
+
+### project_management/prompting.md
+
+- [ ] **cdoc routing table** — Replace `[Replace with your top-level domain — e.g. core system / data model]` with the actual domain name from your project overview cdoc. Add more rows as you create additional cdocs.
 
 ### project_management/standards/style.md
 
@@ -37,23 +40,7 @@ When a setup task is complete, delete all setup related comments in that file.
 - [ ] **State / Data Mutation Rules** — Replace placeholders with your actual shared state and the modules that own mutation rights.
 - [ ] **Universal rules** — Review the Universal Rules section. For any rule that does not apply to this project, move it to the "Disabled Universal Rules" section at the bottom of the file with a written rationale.
 
----
-
-## Setup When Needed
-
-These items become relevant as the project grows. Don't create them speculatively.
-
-### Context documents (cdocs)
-
-Create your first cdoc when a module or domain becomes complex enough that a new Claude session would need background to work on it effectively. Follow `project_management/cdoc.md` — it handles adding the routing table row in `prompting.md` automatically.
-
-### project_management/prompting.md
-
-- [ ] **cdoc routing table** — Populated automatically as you create cdocs. No upfront setup needed. If you want to pre-plan your domains, replace the placeholder rows with your expected areas, but this is optional.
-
 ### project_management/prompts/architecture-check.md
-
-Customize when you're ready to run your first architecture health check (typically after 10+ tasks or when the codebase has enough modules to warrant it).
 
 - [ ] **Project name** — Replace `[PROJECT NAME]` in the Task section.
 - [ ] **`[your source dir]`** — Replace with your actual source directory.
@@ -62,8 +49,11 @@ Customize when you're ready to run your first architecture health check (typical
 - [ ] **F1–F4 check commands** (Step 4) — Replace with the actual commands from your architecture.md Forbidden Patterns section.
 - [ ] **`[your lint command]` and `[your build command]`** (Step 5) — Replace with your actual commands.
 
+### project_management/manifest.md
+
+- [ ] **Project Files section** — Replace the empty table with rows for your actual project files. Add section headers (## headings) to group files as the project grows.
 ---
 
 ## Done
 
-Once all **Setup Now** items are complete, delete this file. (The **Setup When Needed** items are self-documenting in their respective files.)
+Once all items above are complete, delete this file.
