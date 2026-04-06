@@ -20,3 +20,5 @@ Floor is a project management template system for AI-assisted software developme
 - When asked to create a prompt, read project_management/prompting.md. Do not rely on memory, re-read it every time.
 
 - Before creating new source files, adding cross-module imports, or moving responsibilities between modules, read `project_management/standards/architecture.md`.
+
+- When the user requests a feature/task implementation that requires more than one clear step, read prompting.md and enter the Q&A phase before doing anything else.

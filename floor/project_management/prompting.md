@@ -31,7 +31,12 @@ Where the task involves creating new files, adding imports, or changing module r
 # Close prompt
 The prompt should indicate the following workflow item in addition to the task definition:
 
-- Run this checklist after the user has declared the task done (make it clear to run this after completion is externally confirmed, not when it thinks it's done.):
+- When implementation is complete (task description fully implemented), before waiting for user confirmation:
+    1. Write a brief summary of what was done.
+    2. List suggested test steps for the user to verify the work — make clear that running tests is the user's responsibility, not the agent's.
+    3. Explicitly pause and wait for the user to confirm the task is done.
+
+- Only after the user has confirmed the task is done, run this checklist:
 
     1. **status.md** — remove the item from Open; add any newly discovered open items; increment the Task Counter by 1.
     2. **manifest.md** — add a row for every new file created; remove rows for deleted files.
