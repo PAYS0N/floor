@@ -9,7 +9,7 @@ The created prompt should be output to the user, not a markdown doc.
 Compose a prompt for a new session task to do the indicated work item.
 The prompt should indicate that the plan must be presented first, before code changes.
 
-# Interview user if neccessary
+# Interview user if neccessary - Q&A
 If there are management decisions that need to be made before the prompt can be created, ask the user, don't decide yourself.
 
 # Include context
