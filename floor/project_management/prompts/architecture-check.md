@@ -24,11 +24,11 @@ Read every file in `[your source dir]`. For each file, record:
 
 ### Step 3 — Generate Current Diagram
 
-From the import map, produce a Mermaid dependency graph in the same format as the baseline in `architecture-baseline.md`. Include all four diagram sections: Module Dependency Graph, Layered Architecture, Resource Access Boundary, State Mutation Flow. Update the Module Summary table.
+From the import map, produce a Mermaid dependency graph in the same format as the baseline in `architecture-baseline.md` (if it exists). Include any amount of diagrams to completely map the project's architecture. Possibilities are: Module Dependency Graph, Layered Architecture, Resource Access Boundary, State Mutation Flow. Update the Module Summary table.
 
 ### Step 4 — Run Forbidden Pattern Checks
 
-Execute each check command listed in the "Forbidden Patterns" section of `architecture.md`. Report pass/fail for each:
+Execute each below check command. Report pass/fail for each:
 
 - **F1**: `[your check command]` — should return nothing
 - **F2**: `[your check command]` — should return nothing
