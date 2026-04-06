@@ -4,8 +4,6 @@ Complete all items below before using this template. When a setup task is comple
 
 ---
 
-## Setup Now
-
 ### CLAUDE.md
 
 - [ ] **Project summary block** — Replace `[PROJECT NAME] is a [brief description].` with one sentence describing your project.

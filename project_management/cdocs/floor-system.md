@@ -22,7 +22,3 @@ The template ships these file groups:
 - **Forbidden patterns grow organically.** Only F5 (no circular references) is defined. F1–F4 will be added as anti-patterns emerge from real usage.
 - **Setup-then-delete.** New projects run `setup.md` to customize placeholders, then delete it. Setup is considered complete — not partially deferred — when the checklist is done.
 - **First cdoc is required at setup.** The template ships `project_management/cdocs/project-overview.md` as a placeholder. Setup requires filling it in and updating the routing table in `prompting.md`. This ensures a new project is never in a broken state with an empty cdoc list or unpopulated routing table.
-
-## What Floor Does Not Do
-
-Floor does not generate code, run builds, or enforce rules at runtime. It is a static context system — its value is in what it tells Claude, not what it executes.
