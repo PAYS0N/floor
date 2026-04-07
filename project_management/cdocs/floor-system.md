@@ -30,7 +30,7 @@ The template ships these file groups:
 - **project_management/** — Manifest (file index), status (work tracking), cdoc/prompting templates (meta-templates for generating context docs and task prompts).
 - **project_management/standards/** — Style guide and architecture conventions. These are the enforceable rules.
 - **project_management/prompts/** — Reusable prompts (e.g. architecture health check). Consume standards, never define them.
-- **scripts/** — Python tooling scripts. `hash_util.py` is a shared utility module (no shebang, declares `__all__`); `check_cdocs.py` detects stale cdocs by hashing source files declared in cdoc frontmatter; `check_manifest.py` audits `manifest.md` for missing/dead file entries and detects stale cdoc descriptions when declared sources change.
+- **scripts/** — Python tooling scripts. `hash_util.py` is a shared utility module (no shebang, declares `__all__`); `check_cdocs.py` detects stale cdocs by hashing source files declared in cdoc frontmatter; `check_manifest.py` audits `manifest.md` for file coverage (MISSING and DEAD entries).
 
 ## System Flow
 

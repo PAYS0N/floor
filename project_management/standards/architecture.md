@@ -36,7 +36,7 @@ Floor is a documentation/template project, not a runtime application. "Modules" 
 - **standards/** — Defines coding and architecture conventions. Self-contained; does not reference prompts or status.
 - **prompts/** — Task-specific prompts for Claude. May direct the agent to read standards or other files.
 - **cdoc.md, prompting.md** — Meta-templates that define how to create context documents and prompts respectively.
-- **floor/scripts/** — Python tooling shipped with the template. Two kinds of files live here: runnable scripts (shebang + `main()`) and utility modules (no shebang, declare `__all__`). Scripts may import from utility modules in the same directory; scripts must not import from other scripts. `hash_util.py`: shared hashing and frontmatter utilities. `check_cdocs.py`: detects stale cdocs by comparing source file hashes. `check_manifest.py`: audits manifest.md for coverage and cdoc staleness.
+- **floor/scripts/** — Python tooling shipped with the template. Two kinds of files live here: runnable scripts (shebang + `main()`) and utility modules (no shebang, declare `__all__`). Scripts may import from utility modules in the same directory; scripts must not import from other scripts. `hash_util.py`: shared hashing and frontmatter utilities. `check_cdocs.py`: detects stale cdocs by comparing source file hashes. `check_manifest.py`: audits manifest.md for file coverage (MISSING/DEAD entries).
 
 ## Forbidden Patterns
 

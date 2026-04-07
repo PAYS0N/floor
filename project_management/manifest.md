@@ -35,6 +35,5 @@
 | [floor/project_management/cdocs/project-overview.md](../floor/project_management/cdocs/project-overview.md) | Template starter cdoc with placeholder project name and description |
 | [floor/scripts/hash_util.py](../floor/scripts/hash_util.py) | Shared utility module: SHA-256 hashing, frontmatter parsing, and source hash aggregation for Floor scripts |
 | [floor/scripts/check_cdocs.py](../floor/scripts/check_cdocs.py) | Detects stale cdocs by hashing declared source files and comparing against a stored baseline |
-| [floor/scripts/check_manifest.py](../floor/scripts/check_manifest.py) | Audits manifest.md: reports missing/dead file entries and detects stale cdoc descriptions via source hashing |
+| [floor/scripts/check_manifest.py](../floor/scripts/check_manifest.py) | Audits manifest.md for file coverage: reports files missing from the manifest and dead manifest entries |
 | [project_management/cdoc_hashes.json](cdoc_hashes.json) | Generated hash store for check_cdocs.py; tracks per-cdoc source file hashes |
-| [project_management/manifest_hashes.json](manifest_hashes.json) | Generated hash store for check_manifest.py; tracks manifest hash and per-cdoc source hashes |
