@@ -1,0 +1,77 @@
+---
+title: "Floor — Pre-Prompt Decision Tree (Manager Session)"
+---
+flowchart TD
+    START([User requests task in Claude Code]) --> READ_PROMPT[Manager reads prompting.md]
+
+    READ_PROMPT --> RUN_CDOC_CHECK[Run: python check_cdocs.py]
+
+    %% ── Staleness check ──────────────────────────────────
+    RUN_CDOC_CHECK --> CDOC_EXIT{check_cdocs.py<br/>exit code?}
+
+    CDOC_EXIT -->|Exit 2: Error| CDOC_ERR[/Report error to user:<br/>missing source file,<br/>unreadable hash store/]
+    CDOC_ERR --> CDOC_ERR_DECIDE{User decides<br/>how to proceed}
+    CDOC_ERR_DECIDE -->|Fix and retry| RUN_CDOC_CHECK
+    CDOC_ERR_DECIDE -->|Proceed anyway| CHECK_COUNTER
+
+    CDOC_EXIT -->|Exit 0: All fresh| CHECK_COUNTER
+    CDOC_EXIT -->|Exit 1: Stale cdocs| FLAG_STALE[Flag stale cdocs for<br/>inclusion in prompt warning]
+    FLAG_STALE --> CHECK_COUNTER
+
+    %% ── Task Counter ─────────────────────────────────────
+    CHECK_COUNTER[Read Task Counter<br/>from status.md]
+    CHECK_COUNTER --> COUNTER_VAL{Counter ≥ 10?}
+
+    COUNTER_VAL -->|Yes| ARCH_DIVERT[Generate architecture<br/>health check prompt<br/>from architecture-check.md]
+    ARCH_DIVERT --> OUTPUT_ARCH[/Output arch check prompt<br/>to user/]
+    OUTPUT_ARCH --> ARCH_END([Flow ends — user enters<br/>Architecture Health Check flow])
+
+    COUNTER_VAL -->|No| INTERVIEW_CHECK
+
+    %% ── Interview gate ───────────────────────────────────
+    INTERVIEW_CHECK{Management decisions<br/>needed before<br/>prompt can be composed?}
+
+    INTERVIEW_CHECK -->|Yes| ASK_USER[/Ask user for decisions/]
+    ASK_USER --> USER_RESPONDS[User provides decisions]
+    USER_RESPONDS --> SELECT_CDOCS
+
+    INTERVIEW_CHECK -->|No| SELECT_CDOCS
+
+    %% ── Context selection ────────────────────────────────
+    SELECT_CDOCS[Select cdocs via<br/>routing table in prompting.md]
+    SELECT_CDOCS --> NEEDS_ARCH{Task involves new files,<br/>imports, or module<br/>responsibility changes?}
+
+    NEEDS_ARCH -->|Yes| INCLUDE_ARCH[Include architecture.md<br/>read instruction in prompt]
+    NEEDS_ARCH -->|No| SKIP_ARCH[Omit architecture.md]
+
+    INCLUDE_ARCH --> NEEDS_STYLE{Task involves<br/>writing code?}
+    SKIP_ARCH --> NEEDS_STYLE
+
+    NEEDS_STYLE -->|Yes| INCLUDE_STYLE[Include style.md<br/>reference in prompt]
+    NEEDS_STYLE -->|No| SKIP_STYLE[Omit style.md]
+
+    INCLUDE_STYLE --> COMPOSE
+    SKIP_STYLE --> COMPOSE
+
+    %% ── Compose prompt ───────────────────────────────────
+    COMPOSE[Assemble prompt:<br/>1. manifest.md read instruction<br/>2. Selected cdocs<br/>3. Stale cdoc warnings if any<br/>4. Task description<br/>5. Plan-first requirement<br/>6. Standards references<br/>7. Close-prompt checklist]
+
+    COMPOSE --> RECOMMEND_MODEL[Indicate recommended<br/>Claude model<br/>outside prompt text]
+
+    RECOMMEND_MODEL --> OUTPUT_PROMPT[/Output prompt to user/]
+    OUTPUT_PROMPT --> HANDOFF_END([User reviews, modifies,<br/>and pastes into new session])
+
+    %% ── Migration annotations ────────────────────────────
+    style CHECK_COUNTER stroke:#e67e22,stroke-width:3px
+    style COUNTER_VAL stroke:#e67e22,stroke-width:3px
+    style SELECT_CDOCS stroke:#e67e22,stroke-width:3px
+    style INTERVIEW_CHECK stroke:#e67e22,stroke-width:3px
+    style NEEDS_ARCH stroke:#e67e22,stroke-width:3px
+    style NEEDS_STYLE stroke:#e67e22,stroke-width:3px
+
+    %% Legend
+    subgraph LEGEND [" "]
+        direction LR
+        L1[Orange border = migration candidate:<br/>currently LLM-interpreted,<br/>could be script-enforced]
+        L2[Default = already scripted<br/>or inherently requires LLM judgment]
+    end

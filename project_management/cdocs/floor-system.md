@@ -45,7 +45,7 @@ Three distinct Claude session types operate in this workflow. See `cdocs/agents-
 ## System Flow
 
 1. **Copy template** — User copies `floor/` into a new project repo.
-2. **Run setup** — User works through `setup.md`, filling in project-specific placeholders in CLAUDE.md, prompting.md, style.md, architecture.md, and architecture-check.md. When done, setup.md is deleted.
+2. **Run setup** — User works through `setup.md`, filling in project-specific placeholders in CLAUDE.md, prompting.md, style.md, architecture.md, and architecture-check.md. The architecture.md setup block includes a project-type orientation step that guides the user to identify their project type, select a layer scheme, choose graph types for the health check, and evaluate which universal rules apply. When done, setup.md is deleted.
 3. **User requests a task** — User describes a feature or change to Claude in the project session.
 4. **Claude reads prompting.md** — CLAUDE.md's response rule triggers this unconditionally before any other action. Claude runs `scripts/check_cdocs.py` to detect stale cdocs, then checks the Task Counter in status.md: if ≥ 10, it generates an architecture health check prompt from architecture-check.md instead of a task prompt and stops.
 5. **Claude interviews user if needed** — If management decisions must be made before the prompt can be composed, Claude asks rather than deciding.

@@ -17,28 +17,34 @@ If no baseline exists yet, note that this run will produce the initial baseline 
 ### Step 2 — Map Current Architecture
 
 Read every file in `[your source dir]`. For each file, record:
-- All import statements (what it imports and from where)
+- All explicit references to other files (imports, inclusions, links, or declared dependencies)
 - Whether it accesses `[shared resource]` (calls to [relevant APIs or patterns])
-- Whether it mutates shared state (writes to [key state fields])
+- Whether it changes shared state (writes to [key state fields])
 - Its approximate line count
 
 ### Step 3 — Generate Current Diagram
 
-From the import map, produce a Mermaid dependency graph in the same format as the baseline in `architecture-baseline.md` (if it exists). Include any amount of diagrams to completely map the project's architecture. Possibilities are: Module Dependency Graph, Layered Architecture, Resource Access Boundary, State Mutation Flow. Update the Module Summary table.
+Produce Mermaid diagrams in the same format as the baseline in `architecture-baseline.md` (if it exists). Use the graph types listed below as the baseline. If the current state reveals structure not captured by these types, add additional diagrams as needed — do not omit structure that the listed types cannot express.
+
+Graph types for this project:
+- [your graph type 1]
+- [your graph type 2]
+
+Update the Module Summary table.
 
 ### Step 4 — Run Forbidden Pattern Checks
 
-Execute each below check command. Report pass/fail for each:
+Execute each check below. Report pass/fail for each. For manual review steps, describe what was checked and what was found.
 
 - **F1**: `[your check command]` — should return nothing
 - **F2**: `[your check command]` — should return nothing
 - **F3**: `[your check command]` — should return nothing
 - **F4**: `[your check command]` — should return results only in `[allowed module]`
-- **F5**: Review import graph for cycles
+- **F5**: Review dependency graph for cycles
 
 ### Step 5 — Run Build & Lint
 
-Run `[your lint command]` and `[your build command]`. Report any errors or warnings.
+If this project has a build or lint step, run `[your lint command]` and `[your build command]`. Report any errors or warnings. If not applicable, skip this step.
 
 ### Step 6 — Compare to Baseline
 

@@ -1,0 +1,87 @@
+---
+title: "Floor — Post-Task Cleanup (Agent Close-Prompt Checklist)"
+---
+flowchart TD
+    START([User confirms task is done]) --> STATUS
+
+    %% ── Step 1: status.md ────────────────────────────────
+    STATUS[1. Update status.md]
+    STATUS --> STATUS_REMOVE[Remove completed item<br/>from Open Items]
+    STATUS_REMOVE --> STATUS_ADD{New open items<br/>discovered during task?}
+    STATUS_ADD -->|Yes| STATUS_NEW[Add new items to Open,<br/>sorted by severity then difficulty]
+    STATUS_ADD -->|No| STATUS_COUNTER
+    STATUS_NEW --> STATUS_COUNTER
+    STATUS_COUNTER[Increment Task Counter by 1]
+
+    STATUS_COUNTER --> STATUS_FAIL1{IMPLICIT FAILURE:<br/>Agent forgets to<br/>increment counter}
+    STATUS_FAIL1 -->|Not caught| STATUS_DRIFT[Counter drifts —<br/>arch check never triggers]
+    STATUS_FAIL1 -->|Caught by| STATUS_MITIGATE1[No mitigation exists.<br/>Counter is LLM-managed text.]
+
+    STATUS_COUNTER --> MANIFEST
+
+    %% ── Step 2: manifest.md ──────────────────────────────
+    MANIFEST[2. Update manifest.md]
+    MANIFEST --> MANIFEST_ADD[Add row for every<br/>new file created]
+    MANIFEST_ADD --> MANIFEST_DEL[Remove rows for<br/>deleted files]
+
+    MANIFEST_DEL --> MANIFEST_FAIL1{IMPLICIT FAILURE:<br/>Agent misses a<br/>created or deleted file}
+    MANIFEST_FAIL1 -->|Caught later by| MANIFEST_CATCH[check_manifest.py<br/>reports MISSING or DEAD]
+    MANIFEST_FAIL1 -->|Not caught until| MANIFEST_LATE[Next session that<br/>runs check_manifest.py]
+
+    MANIFEST_DEL --> COVERAGE
+
+    %% ── Step 3: cdoc coverage ────────────────────────────
+    COVERAGE[3. Run: python<br/>check_cdoc_coverage.py]
+    COVERAGE --> COV_EXIT{Exit code?}
+
+    COV_EXIT -->|Exit 0: All covered| CDOC_UPDATE
+    COV_EXIT -->|Exit 1: UNCOVERED files| COV_FIX[Add uncovered files to<br/>appropriate cdoc sources list]
+    COV_EXIT -->|Exit 2: Error| COV_ERR[/Report error/]
+
+    COV_FIX --> COV_DECIDE{Suitable cdoc exists?}
+    COV_DECIDE -->|Yes| COV_ADD[Add to existing cdoc's<br/>sources frontmatter]
+    COV_DECIDE -->|No| COV_CREATE[Create new cdoc<br/>per cdoc.md template]
+    COV_CREATE --> COV_ROUTE[Add row to routing table<br/>in prompting.md]
+
+    COV_ADD --> CDOC_UPDATE
+    COV_ROUTE --> CDOC_UPDATE
+    COV_ERR --> CDOC_UPDATE
+
+    %% ── Step 4: Update cdocs ─────────────────────────────
+    CDOC_UPDATE[4. Read cdoc.md template.<br/>Update relevant cdocs to<br/>reflect current system state.]
+
+    CDOC_UPDATE --> CDOC_SIZE{Cdoc exceeds<br/>70 lines or 6+ sources?}
+    CDOC_SIZE -->|Yes| CDOC_SPLIT[Split cdoc.<br/>Update manifest.md rows.<br/>Update prompting.md references.]
+    CDOC_SIZE -->|No| REMIND
+
+    CDOC_SPLIT --> REMIND
+
+    CDOC_UPDATE --> CDOC_FAIL1{IMPLICIT FAILURE:<br/>Agent writes cdoc that<br/>doesn't match current state}
+    CDOC_FAIL1 -->|Caught later by| CDOC_STALE_CATCH[check_cdocs.py on<br/>next task — but only detects<br/>source file changes, not<br/>inaccurate prose]
+    CDOC_FAIL1 -->|Not caught| CDOC_DRIFT[Cdoc prose drifts from<br/>reality. No script detects this.]
+
+    CDOC_UPDATE --> CDOC_FAIL2{IMPLICIT FAILURE:<br/>Agent skips cdoc.md<br/>template rules}
+    CDOC_FAIL2 -->|Not caught| CDOC_FORMAT[Cdoc format inconsistency.<br/>No enforcement exists.]
+
+    %% ── Step 5: Commit reminder ──────────────────────────
+    REMIND[5. Remind user to git commit]
+    REMIND --> USER_COMMIT{User commits?}
+
+    USER_COMMIT -->|Yes| DONE([Task complete])
+    USER_COMMIT -->|No| COMMIT_FAIL[IMPLICIT FAILURE:<br/>Uncommitted changes.<br/>No enforcement exists —<br/>could wire into pre-session hook.]
+
+    %% ── Styling ──────────────────────────────────────────
+    style STATUS_DRIFT fill:#e74c3c,color:#fff
+    style CDOC_DRIFT fill:#e74c3c,color:#fff
+    style CDOC_FORMAT fill:#e74c3c,color:#fff
+    style COMMIT_FAIL fill:#e74c3c,color:#fff
+    style MANIFEST_LATE fill:#f39c12,color:#fff
+    style MANIFEST_CATCH fill:#27ae60,color:#fff
+    style CDOC_STALE_CATCH fill:#f39c12,color:#fff
+
+    subgraph LEGEND [" "]
+        direction LR
+        L_GREEN[Green = caught by existing script]
+        L_ORANGE[Orange = caught eventually, with delay]
+        L_RED[Red = undetected gap — no mitigation]
+    end

@@ -1,0 +1,111 @@
+---
+title: "Floor — Full Task Lifecycle"
+---
+sequenceDiagram
+    actor U as User (Claude Code)
+    participant M as Manager Session
+    participant S as Scripts
+    participant A as Agent Session
+
+    note over U,A: ═══ PHASE 1 — PROMPT GENERATION ═══
+
+    U->>M: Request task / describe feature
+    activate M
+
+    M->>M: Read prompting.md (triggered by CLAUDE.md response rule)
+
+    M->>S: python check_cdocs.py
+    activate S
+    S-->>M: Exit 0 (all fresh) / Exit 1 (stale cdocs listed) / Exit 2 (error)
+    deactivate S
+    note right of S: ⚠ MIGRATION CANDIDATE<br/>Exit code currently<br/>interpreted by LLM,<br/>not enforced
+
+    M->>M: Check Task Counter in status.md
+    note right of M: ⚠ MIGRATION CANDIDATE<br/>Counter read + threshold<br/>check is pure text parsing—<br/>should be a script
+
+    alt Task Counter ≥ 10
+        M->>M: Generate arch health check prompt<br/>(from architecture-check.md)
+        M-->>U: Output arch check prompt instead of task prompt
+        note over U: Flow diverts to<br/>Architecture Health Check<br/>(see Diagram 4)
+    end
+
+    alt Interview needed
+        M-->>U: Ask management decisions
+        U->>M: Provide decisions
+    end
+
+    M->>M: Select cdocs via routing table
+    M->>M: Compose prompt (manifest instruction,<br/>selected cdocs, task, plan-first rule,<br/>standards refs, close-prompt checklist)
+    M-->>U: Output complete prompt text
+    deactivate M
+
+    note over U,A: ═══ PHASE 2 — USER HANDOFF (CRITICAL CHECKPOINT) ═══
+
+    note over U: User reads prompt in terminal
+    U->>U: Review prompt for accuracy
+    U->>U: Modify prompt if needed<br/>(fix context, adjust scope,<br/>add/remove cdocs)
+    U->>U: Open new Claude Code session
+
+    note over U,A: ═══ PHASE 3 — AGENT EXECUTION ═══
+
+    U->>A: Paste (modified) prompt
+    activate A
+
+    A->>A: Read manifest.md
+    A->>A: Read all specified cdocs
+    A->>A: Read standards (style.md, architecture.md if applicable)
+
+    A-->>U: Present implementation plan
+    deactivate A
+
+    loop Plan Iteration
+        U->>U: Evaluate plan
+        alt Plan needs changes
+            U->>A: Request modifications
+            activate A
+            A-->>U: Revised plan
+            deactivate A
+        else Plan acceptable
+            U->>A: Approve plan (explicit or implicit)
+        end
+    end
+
+    activate A
+    A->>A: Implement changes<br/>(following style.md, checking architecture.md)
+
+    note over U,A: ═══ PHASE 4 — VERIFICATION ═══
+
+    A-->>U: Summary of changes + suggested test steps
+    note right of A: Agent explicitly pauses here.<br/>Testing is user's responsibility.
+    deactivate A
+
+    U->>U: Run suggested tests
+    U->>U: Verify implementation
+
+    alt Issues found
+        U->>A: Report issues
+        activate A
+        A->>A: Fix issues
+        A-->>U: Updated summary + new test steps
+        deactivate A
+        note over U: User re-verifies
+    end
+
+    U->>A: Confirm task is done
+    activate A
+
+    note over U,A: ═══ PHASE 5 — CLEANUP (see Diagram 3 for detail) ═══
+
+    A->>A: Update status.md (remove item, increment counter)
+    A->>A: Update manifest.md (add/remove rows)
+    A->>S: python check_cdoc_coverage.py
+    activate S
+    S-->>A: UNCOVERED files list / Exit 0
+    deactivate S
+    A->>A: Add uncovered files to cdoc sources
+    A->>A: Update relevant cdocs
+
+    A-->>U: Remind user to git commit
+    deactivate A
+
+    U->>U: git commit

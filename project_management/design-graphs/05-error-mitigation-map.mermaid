@@ -1,0 +1,103 @@
+---
+title: "Floor — Error & Mitigation Map"
+---
+flowchart TD
+    subgraph PHASE1 ["PHASE 1 — Prompt Generation (Manager Session)"]
+        direction TB
+
+        E1_1["E1.1 — Manager skips prompting.md<br/>─────────────────────<br/>Cause: CLAUDE.md rule not followed<br/>Detection: NONE<br/>Mitigation: NONE<br/>─────────────────────<br/>⚠ MIGRATE: Pre-session hook<br/>could enforce reading prompting.md"]
+
+        E1_2["E1.2 — check_cdocs.py not run<br/>─────────────────────<br/>Cause: LLM skips script step<br/>Detection: NONE (script must be invoked)<br/>Mitigation: NONE<br/>─────────────────────<br/>⚠ MIGRATE: Auto-run on<br/>session start or task request"]
+
+        E1_3["E1.3 — check_cdocs.py exit 2 (error)<br/>─────────────────────<br/>Cause: Missing source file,<br/>unreadable hash store<br/>Detection: SCRIPT (exit code + stderr)<br/>Mitigation: Error reported to user"]
+
+        E1_4["E1.4 — Stale cdoc included<br/>without warning<br/>─────────────────────<br/>Cause: LLM ignores stale flag<br/>from check_cdocs.py<br/>Detection: PARTIAL (script detects,<br/>LLM must relay warning)<br/>─────────────────────<br/>⚠ MIGRATE: Script could inject<br/>warning text directly into prompt"]
+
+        E1_5["E1.5 — Task Counter not checked<br/>or misread<br/>─────────────────────<br/>Cause: LLM skips or misparses<br/>counter from status.md<br/>Detection: NONE<br/>Mitigation: NONE<br/>─────────────────────<br/>⚠ MIGRATE: python check_counter.py<br/>returns threshold status"]
+
+        E1_6["E1.6 — Wrong cdocs selected<br/>─────────────────────<br/>Cause: LLM misreads routing table<br/>or task domain is ambiguous<br/>Detection: NONE at generation time<br/>Mitigation: User review during handoff"]
+
+        E1_7["E1.7 — Interview skipped when needed<br/>─────────────────────<br/>Cause: LLM decides instead of asking<br/>Detection: NONE<br/>Mitigation: User may catch<br/>during prompt review"]
+    end
+
+    subgraph PHASE2 ["PHASE 2 — User Handoff"]
+        direction TB
+
+        E2_1["E2.1 — User pastes prompt unmodified<br/>when it needs changes<br/>─────────────────────<br/>Cause: User doesn't review carefully<br/>Detection: NONE<br/>Mitigation: NONE (human responsibility)"]
+
+        E2_2["E2.2 — User modifies prompt incorrectly<br/>─────────────────────<br/>Cause: User introduces errors<br/>Detection: NONE<br/>Mitigation: Agent may notice<br/>inconsistencies during planning"]
+
+        E2_3["E2.3 — Prompt not pasted /<br/>session never started<br/>─────────────────────<br/>Cause: User abandons or forgets<br/>Detection: NONE<br/>Mitigation: NONE<br/>─────────────────────<br/>Note: Low severity — no state<br/>was mutated, task just stalls"]
+    end
+
+    subgraph PHASE3 ["PHASE 3 — Agent Execution"]
+        direction TB
+
+        E3_1["E3.1 — Agent skips manifest.md read<br/>─────────────────────<br/>Cause: Agent ignores prompt instruction<br/>Detection: NONE<br/>Mitigation: NONE<br/>─────────────────────<br/>⚠ MIGRATE: Could require manifest<br/>hash verification before planning"]
+
+        E3_2["E3.2 — Agent skips plan presentation<br/>─────────────────────<br/>Cause: Agent jumps to implementation<br/>Detection: NONE (prompt says plan-first<br/>but nothing enforces it)<br/>Mitigation: User can interrupt<br/>─────────────────────<br/>⚠ MIGRATE: Could require explicit<br/>plan approval gate"]
+
+        E3_3["E3.3 — Agent violates architecture.md<br/>─────────────────────<br/>Cause: Agent doesn't read or<br/>doesn't follow conventions<br/>Detection: DELAYED — caught at<br/>next arch health check (up to 10 tasks)<br/>Mitigation: F1-F5 check commands<br/>─────────────────────<br/>⚠ MIGRATE: Run forbidden pattern<br/>checks as post-implementation script"]
+
+        E3_4["E3.4 — Agent violates style.md<br/>─────────────────────<br/>Cause: Agent doesn't follow conventions<br/>Detection: PARTIAL — lint/build<br/>catches some, not style prose rules<br/>Mitigation: User code review"]
+    end
+
+    subgraph PHASE4 ["PHASE 4 — Verification"]
+        direction TB
+
+        E4_1["E4.1 — User skips testing<br/>─────────────────────<br/>Cause: User confirms without running tests<br/>Detection: NONE<br/>Mitigation: NONE (human responsibility)"]
+
+        E4_2["E4.2 — User confirms with<br/>known issues<br/>─────────────────────<br/>Cause: User accepts 'good enough'<br/>without recording remaining issues<br/>Detection: NONE<br/>Mitigation: Should add to Open Items<br/>─────────────────────<br/>Note: Not a system failure —<br/>but issues get lost"]
+    end
+
+    subgraph PHASE5 ["PHASE 5 — Cleanup"]
+        direction TB
+
+        E5_1["E5.1 — Counter not incremented<br/>─────────────────────<br/>Cause: Agent forgets/misformats<br/>Detection: NONE<br/>Mitigation: NONE<br/>─────────────────────<br/>⚠ MIGRATE: python increment_counter.py"]
+
+        E5_2["E5.2 — Manifest not updated<br/>─────────────────────<br/>Cause: Agent misses files<br/>Detection: DELAYED — check_manifest.py<br/>on next run<br/>Mitigation: Script catches it eventually"]
+
+        E5_3["E5.3 — check_cdoc_coverage.py not run<br/>─────────────────────<br/>Cause: Agent skips step<br/>Detection: NONE until next run<br/>Mitigation: NONE<br/>─────────────────────<br/>⚠ MIGRATE: Auto-run as<br/>post-task hook"]
+
+        E5_4["E5.4 — Cdoc prose inaccurate<br/>─────────────────────<br/>Cause: Agent writes incorrect<br/>or incomplete cdoc content<br/>Detection: NONE — check_cdocs.py<br/>only detects source file changes,<br/>not prose accuracy<br/>Mitigation: NONE<br/>─────────────────────<br/>Gap: Hardest to automate.<br/>Semantic accuracy requires LLM review."]
+
+        E5_5["E5.5 — Cdoc exceeds 70 lines /<br/>6+ sources without split<br/>─────────────────────<br/>Cause: Agent doesn't check thresholds<br/>Detection: NONE<br/>Mitigation: NONE<br/>─────────────────────<br/>⚠ MIGRATE: python check_cdoc_size.py"]
+
+        E5_6["E5.6 — User forgets git commit<br/>─────────────────────<br/>Cause: User ignores reminder<br/>Detection: NONE<br/>Mitigation: NONE<br/>─────────────────────<br/>⚠ MIGRATE: Pre-session hook checks<br/>for uncommitted changes"]
+    end
+
+    %% ── Color coding ─────────────────────────────────────
+    style E1_1 fill:#e74c3c,color:#fff
+    style E1_2 fill:#e74c3c,color:#fff
+    style E1_3 fill:#27ae60,color:#fff
+    style E1_4 fill:#f39c12,color:#fff
+    style E1_5 fill:#e74c3c,color:#fff
+    style E1_6 fill:#f39c12,color:#fff
+    style E1_7 fill:#f39c12,color:#fff
+
+    style E2_1 fill:#95a5a6,color:#fff
+    style E2_2 fill:#95a5a6,color:#fff
+    style E2_3 fill:#95a5a6,color:#fff
+
+    style E3_1 fill:#e74c3c,color:#fff
+    style E3_2 fill:#e74c3c,color:#fff
+    style E3_3 fill:#f39c12,color:#fff
+    style E3_4 fill:#f39c12,color:#fff
+
+    style E4_1 fill:#95a5a6,color:#fff
+    style E4_2 fill:#95a5a6,color:#fff
+
+    style E5_1 fill:#e74c3c,color:#fff
+    style E5_2 fill:#f39c12,color:#fff
+    style E5_3 fill:#e74c3c,color:#fff
+    style E5_4 fill:#e74c3c,color:#fff
+    style E5_5 fill:#e74c3c,color:#fff
+    style E5_6 fill:#e74c3c,color:#fff
+
+    subgraph LEGEND [" "]
+        direction LR
+        LG["🟢 Green = Script-detected, reported"]
+        LO["🟠 Orange = Partially detected or delayed"]
+        LR2["🔴 Red = No detection, gap"]
+        LGR["⚪ Gray = Human responsibility, not system scope"]
+    end
