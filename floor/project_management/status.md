@@ -14,12 +14,6 @@
 |------|--------|-------|
 | — | — | — |
 
-## Blocked
-
-| Item | Blocker | Notes |
-|------|---------|-------|
-| — | — | — |
-
 ## Open Items
 
 | Description | Severity | Difficulty |

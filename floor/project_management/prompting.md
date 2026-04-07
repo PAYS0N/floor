@@ -1,7 +1,10 @@
 <!-- Template file. Customize: replace the cdoc routing table with rows matching your project's actual domains and context documents. The instructions above and below the table are universal and should be kept as-is. -->
 
 # Pre-prompt
+
 Before composing the prompt: check the Task Counter in `project_management/status.md`. If the counter is 10 or greater, generate the architecture check prompt from `project_management/prompts/architecture-check.md` instead of a task prompt. Do not proceed with the steps below.
+
+Run `python scripts/check_cdocs.py` from the repo root. If any cdocs are reported as STALE that would be part of the prompt, include a note in the generated prompt alerting the agent that those cdocs may not reflect the current source files. Do not stop — continue composing the prompt normally.
 
 # Prompt instructions
 Indicate the Claude model best suited for the task, not as part of the prompt.

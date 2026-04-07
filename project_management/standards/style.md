@@ -24,7 +24,7 @@ These apply to all projects by default. To disable one, move it to the "Disabled
 
 ## Language & Tooling
 
-- Languages: Markdown (documentation/templates), Bash (scripts)
+- Languages: Markdown (documentation/templates), Bash (scripts), Python (tooling scripts)
 - Build command: None yet
 - Lint/format command: None yet
 - Source directory: `floor/` (template files distributed to new projects)
@@ -32,14 +32,17 @@ These apply to all projects by default. To disable one, move it to the "Disabled
 
 ## Naming Conventions
 
-- Files: lowercase kebab-case (e.g. `architecture-check.md`)
+- Files: lowercase kebab-case (e.g. `architecture-check.md`); Python files use lowercase underscore-separated (e.g. `check_cdocs.py`, `hash_util.py`) per Python convention
+- Python scripts vs. modules: runnable scripts begin with `#!/usr/bin/env python3` and define `main()` + `if __name__ == "__main__":`; importable utility modules omit the shebang and declare `__all__` near the top to explicitly list their public surface
 - Directories: lowercase with underscores for multi-word (e.g. `project_management/`)
 - Bash variables: UPPER_SNAKE_CASE for exported/environment, lower_snake_case for local
 - Bash functions: lower_snake_case
+- Python module-level constants: UPPER_SNAKE_CASE
+- Python functions and variables: lower_snake_case
 
 ## Formatting
 
-- Indentation: 2 spaces for Bash scripts, no indentation convention for Markdown
+- Indentation: 2 spaces for Bash and Python scripts, no indentation convention for Markdown
 - Markdown headings: ATX-style (`##`), single blank line before and after
 - Bash: Opening braces/`then`/`do` on the same line as the statement
 

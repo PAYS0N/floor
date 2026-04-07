@@ -6,7 +6,7 @@ Floor is a project management template system for AI-assisted software developme
 
 ## Response rules
 
-- When the user requests a feature/task implementation or a prompt, read and follow prompting.md before doing anything else.
+- When the user requests a feature/task implementation, read and follow ./project_management/prompting.md before doing anything else. DO NOT DO THE CHANGE. Create a prompt for it.
 
 ## Meta rules
 
