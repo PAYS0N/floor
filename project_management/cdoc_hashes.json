@@ -1,21 +1,42 @@
 {
-  "project_management/cdocs/floor-system.md": {
-    "content_hash": "6e440c8a0f0c62afc8d44257d4ff6f0d7f1089a191b5fb52b0d17b57f8121001",
+  "project_management/cdocs/agents-and-roles.md": {
+    "content_hash": "ab017828a705cd6503599a88fb29cab37c7cb202bcb391d77ee7a809d67087d6",
     "source_file_hashes": {
-      "floor/CLAUDE.md": "1490ee8a3f4117bdc34f438b5639c6762cad6d6dbc1f44aed2b013e8b3dd2673",
-      "floor/project_management/cdoc.md": "cbedf863d51bf390e2d76a0c1798e863261f3283255635f1724fb7c93b13bf7d",
+      "floor/CLAUDE.md": "7eda8acc37c0880c03e0ef6730c0a94768e40cda35fcf97e0f563e2a069c3fc1",
+      "floor/project_management/prompting.md": "34538e1a551de40e7ac1a4cd5e6567ce982c7d454685274c9d5d8d4f3b8f9986",
+      "floor/project_management/prompts/architecture-check.md": "05bae2c33612151f86c3a9f4ea4d5c26848d4be0430c8698919c2d39082a5232"
+    },
+    "source_hash": "6162e07f0cecb4135c805b475991be562749668d41440d9699fa09cfac4de39b"
+  },
+  "project_management/cdocs/floor-system.md": {
+    "content_hash": "4f9250d7993a295d00ce30ef71832e48081a94a5dbc4880b7600f6354d2193b4",
+    "source_file_hashes": {
+      ".gitignore": "0cd064765b740a9d791f15266ee55d644b4b0cf40294754c21d5901ed9c781c3",
+      "floor/CLAUDE.md": "7eda8acc37c0880c03e0ef6730c0a94768e40cda35fcf97e0f563e2a069c3fc1",
+      "floor/project_management/cdoc.md": "41761a77a65dcc565a565366c3418bff267da3cd98111f0ececd0a21acdfded2",
       "floor/project_management/cdocs/project-overview.md": "f5e415327a900b8d4e2fcae2bc28a821c16efcf4512e6f334210cd1995377af7",
       "floor/project_management/manifest.md": "54e51d58fb88d293b30c0af326d3b66bb03fabf9b3e5f597a343d4b8d60c958a",
-      "floor/project_management/prompting.md": "c7670cc28ef3dae85309e39955109e24b6ec888a432bac1bb826f9189762be51",
-      "floor/project_management/prompts/architecture-check.md": "b222b8cf1e2aa9c17752e3dd4459cb637f2a03f89e63d863df033ec432fe1f05",
-      "floor/project_management/standards/architecture.md": "116fc53f082b0d320dc8347c390b5c6a0ea5ecf2c36d8b12721987f7ef4d92d0",
+      "floor/project_management/prompting.md": "34538e1a551de40e7ac1a4cd5e6567ce982c7d454685274c9d5d8d4f3b8f9986",
+      "floor/project_management/prompts/architecture-check.md": "05bae2c33612151f86c3a9f4ea4d5c26848d4be0430c8698919c2d39082a5232",
+      "floor/project_management/standards/architecture.md": "d861b38731fdd3ab6c5f8140a708fd796a43ebb0770a42784c24fc7a8f4ed4d9",
       "floor/project_management/standards/style.md": "c1d68940a793fb08ff52c11c8b2502a4c32dd3c56ef66c44ed3367bc1824d2ad",
       "floor/project_management/status.md": "26c96b16be7d395772fa86b759d48dd5dca2790b61f10eb1c10dfa98bda1c82f",
+      "floor/scripts/check_cdoc_coverage.py": "40b8032d39518e7ab6a94431aaec2c57998e77f81f7b54127ab3a59c1c93546e",
       "floor/scripts/check_cdocs.py": "8400824eb965b0270eab17b135d72fec26a0f30da88c6910441a3e68bbff40e5",
       "floor/scripts/check_manifest.py": "46adcf75ef9b1754c2e894b3a1eac76ffe8b1bec8e6118f01e8321d4c900cde4",
       "floor/scripts/hash_util.py": "b1566c384124374d26507305e23634dc246c1d1265836b464978b3e64e26ee25",
-      "floor/setup.md": "421c5b225f075ce5c7cd364b273ad06a9a1badaa1dabbe0c968ddba376157249"
+      "floor/setup.md": "b7a864d990be41a37521e299c2c4a6444d107109883952bfe8bca1974b67d7c4"
     },
-    "source_hash": "2ee59db946d19a5325fcb088bb6b0658044fcf1d6db1849288d86325758c2dc3"
+    "source_hash": "fc1df3f0c79e69c34febd8c2b0f781adf15b3507c715022511ab42de93c79288"
+  },
+  "project_management/cdocs/scripts-and-checks.md": {
+    "content_hash": "4de1df91acef47426524ab0e4bd029c495a959f879467a1a49da22250b2a0a69",
+    "source_file_hashes": {
+      "floor/scripts/check_cdoc_coverage.py": "40b8032d39518e7ab6a94431aaec2c57998e77f81f7b54127ab3a59c1c93546e",
+      "floor/scripts/check_cdocs.py": "8400824eb965b0270eab17b135d72fec26a0f30da88c6910441a3e68bbff40e5",
+      "floor/scripts/check_manifest.py": "46adcf75ef9b1754c2e894b3a1eac76ffe8b1bec8e6118f01e8321d4c900cde4",
+      "floor/scripts/hash_util.py": "b1566c384124374d26507305e23634dc246c1d1265836b464978b3e64e26ee25"
+    },
+    "source_hash": "627e68b37109d4202c4c68b7a737a36c0b141730a67bab3a4b7ac08be272e7f5"
   }
 }

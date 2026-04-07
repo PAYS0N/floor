@@ -22,6 +22,7 @@ Floor is a documentation/template project, not a runtime application. "Modules" 
 |-------|---------|----------------|
 | 0 — Entry | `CLAUDE.md` | Entry point for Claude sessions; points to manifest, defines rules |
 | 1 — Orchestration | `project_management/manifest.md`, `project_management/status.md` | File index and work tracking; no conventions or templates |
+| 1 — Artifacts | `project_management/artifacts/` | Structured reference data produced by the architecture health check: module summary and Mermaid diagrams. Not narrative; not cdocs. |
 | 2 — Standards | `project_management/standards/style.md`, `project_management/standards/architecture.md` | Define project conventions; referenced by prompts and CLAUDE.md |
 | 3 — Prompts & Templates | `project_management/prompts/`, `project_management/cdoc.md`, `project_management/prompting.md` | Task prompts and template generators; consume standards, never define them |
 | 4 — Scripts | `floor/scripts/` | Standalone tooling scripts; no imports from layers above; no domain logic |
@@ -36,6 +37,7 @@ Floor is a documentation/template project, not a runtime application. "Modules" 
 - **standards/** — Defines coding and architecture conventions. Self-contained; does not reference prompts or status.
 - **prompts/** — Task-specific prompts for Claude. May direct the agent to read standards or other files.
 - **cdoc.md, prompting.md** — Meta-templates that define how to create context documents and prompts respectively.
+- **artifacts/** — Structured reference data written by the architecture check agent. Contains `architecture-baseline.md` (module summary + diagram index) and four `.mermaid` files (one per diagram type). These are generated outputs — not narrative, not cdocs. Do not edit manually; the arch agent overwrites them on PASS.
 - **floor/scripts/** — Python tooling shipped with the template. Two kinds of files live here: runnable scripts (shebang + `main()`) and utility modules (no shebang, declare `__all__`). Scripts may import from utility modules in the same directory; scripts must not import from other scripts. `hash_util.py`: shared hashing and frontmatter utilities. `check_cdocs.py`: detects stale cdocs by comparing source file hashes. `check_manifest.py`: audits manifest.md for file coverage (MISSING/DEAD entries).
 
 ## Forbidden Patterns

@@ -14,7 +14,11 @@
 | [project_management/standards/style.md](standards/style.md) | Coding conventions: universal rules, naming, formatting, error handling, and build gate |
 | [project_management/standards/architecture.md](standards/architecture.md) | Architecture conventions: universal rules, module hierarchy, forbidden patterns, state mutation rules |
 | [project_management/prompts/architecture-check.md](prompts/architecture-check.md) | Periodic health check prompt: map current architecture, run forbidden pattern checks, compare to baseline, produce verdict |
-| [project_management/architecture-baseline.md](architecture-baseline.md) | Architecture dependency graph snapshot; updated on each health check pass |
+| [project_management/artifacts/architecture-baseline.md](artifacts/architecture-baseline.md) | Architecture module summary and diagram index; updated on each health check pass |
+| [project_management/artifacts/01-module-dependency.mermaid](artifacts/01-module-dependency.mermaid) | Module dependency graph: file-to-file read/write/ref edges |
+| [project_management/artifacts/02-layer-hierarchy.mermaid](artifacts/02-layer-hierarchy.mermaid) | Layer hierarchy diagram: permitted reference directions by layer |
+| [project_management/artifacts/03-state-mutation.mermaid](artifacts/03-state-mutation.mermaid) | State mutation flow: which agents are authorized to mutate each shared state file |
+| [project_management/artifacts/04-user-task-flow.mermaid](artifacts/04-user-task-flow.mermaid) | User task flow sequence: end-to-end developer workflow |
 | [project_management/cdocs/floor-system.md](cdocs/floor-system.md) | Context document: what Floor is, its structure, key design decisions, and boundaries |
 | [project_management/cdocs/agents-and-roles.md](cdocs/agents-and-roles.md) | Context document: the three agent types, user responsibilities, workflow break points, and correction mechanisms |
 | [project_management/cdocs/scripts-and-checks.md](cdocs/scripts-and-checks.md) | Context document: each Floor script's role, invocation point, output, and edge case behavior |

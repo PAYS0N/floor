@@ -28,12 +28,12 @@ All Claude sessions start fresh. The three agent types below are distinct sessio
 
 **Architecture check agent** — A fresh Claude session. The prompting agent generates this prompt from architecture-check.md when the Task Counter reaches 10; the user pastes it.
 
-1. Reads architecture.md and architecture-baseline.md.
+1. Reads architecture.md and `artifacts/architecture-baseline.md` (module summary + diagram index).
 2. Reads every file in `floor/`, mapping all inter-file references and state mutations.
-3. Generates a Mermaid dependency graph (four sections).
-4. Compares to the baseline; flags new/removed references, layer violations, shifted responsibilities.
+3. Generates four Mermaid diagrams (module dependency, layer hierarchy, state mutation, user task flow).
+4. Compares to the baseline diagrams in `artifacts/`; flags new/removed references, layer violations, shifted responsibilities.
 5. Issues verdict: PASS, PASS WITH NOTES, or FAIL.
-6. On PASS or PASS WITH NOTES: overwrites the baseline, resets Task Counter to 0.
+6. On PASS or PASS WITH NOTES: overwrites `artifacts/architecture-baseline.md` and all four `.mermaid` files; resets Task Counter to 0.
 7. On FAIL: presents violations to the user; user initiates a new task agent to fix them.
 
 **User**
