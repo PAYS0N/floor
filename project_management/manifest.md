@@ -36,4 +36,5 @@
 | [floor/scripts/hash_util.py](../floor/scripts/hash_util.py) | Shared utility module: SHA-256 hashing, frontmatter parsing, and source hash aggregation for Floor scripts |
 | [floor/scripts/check_cdocs.py](../floor/scripts/check_cdocs.py) | Detects stale cdocs by hashing declared source files and comparing against a stored baseline |
 | [floor/scripts/check_manifest.py](../floor/scripts/check_manifest.py) | Audits manifest.md for file coverage: reports files missing from the manifest and dead manifest entries |
+| [floor/scripts/check_cdoc_coverage.py](../floor/scripts/check_cdoc_coverage.py) | Reports repo files not declared as a source in any cdoc; wired into the post-task cleanup checklist |
 | [project_management/cdoc_hashes.json](cdoc_hashes.json) | Generated hash store for check_cdocs.py; tracks per-cdoc source file hashes |

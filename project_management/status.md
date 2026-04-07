@@ -2,7 +2,7 @@
 
 ## Task Counter
 
-4
+5
 
 <!-- Reset by architecture health check — 2026-04-02 -->
 

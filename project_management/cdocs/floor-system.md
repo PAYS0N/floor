@@ -3,6 +3,8 @@ sources:
   - floor/scripts/hash_util.py
   - floor/scripts/check_cdocs.py
   - floor/scripts/check_manifest.py
+  - floor/scripts/check_cdoc_coverage.py
+  - .gitignore
   - floor/CLAUDE.md
   - floor/setup.md
   - floor/project_management/cdoc.md
@@ -30,7 +32,7 @@ The template ships these file groups:
 - **project_management/** — Manifest (file index), status (work tracking), cdoc/prompting templates (meta-templates for generating context docs and task prompts).
 - **project_management/standards/** — Style guide and architecture conventions. These are the enforceable rules.
 - **project_management/prompts/** — Reusable prompts (e.g. architecture health check). Consume standards, never define them.
-- **scripts/** — Python tooling scripts. `hash_util.py` is a shared utility module (no shebang, declares `__all__`); `check_cdocs.py` detects stale cdocs by hashing source files declared in cdoc frontmatter; `check_manifest.py` audits `manifest.md` for file coverage (MISSING and DEAD entries).
+- **scripts/** — Python tooling scripts. `hash_util.py` is a shared utility module (no shebang, declares `__all__`); `check_cdocs.py` detects stale cdocs by hashing source files declared in cdoc frontmatter; `check_manifest.py` audits `manifest.md` for file coverage (MISSING and DEAD entries); `check_cdoc_coverage.py` reports repo files not declared as a source in any cdoc (UNCOVERED entries).
 
 ## System Flow
 
@@ -47,7 +49,7 @@ The template ships these file groups:
 11. **Agent implements** — Agent makes changes, following style.md conventions and checking architecture.md before creating files, adding imports, or shifting module responsibilities.
 12. **Agent pauses for user confirmation** — Agent writes a brief summary of what was done, lists test steps for the user to run (making clear testing is the user's responsibility), and explicitly waits.
 13. **User verifies and confirms** — User runs the suggested tests and tells the agent the task is complete.
-14. **Agent updates management files** — Agent removes the item from Open in status.md (adds any newly discovered items, increments Task Counter), updates manifest.md rows for created or deleted files, and updates the relevant cdocs to reflect current system state.
+14. **Agent updates management files** — Agent removes the item from Open in status.md (adds any newly discovered items, increments Task Counter), updates manifest.md rows for created or deleted files, runs `check_cdoc_coverage.py` and adds any UNCOVERED files to the appropriate cdoc's sources, and updates the relevant cdocs to reflect current system state.
 15. **Agent reminds user to commit** — Final output is a reminder to make a git commit.
 
 ## Key Design Decisions
