@@ -41,7 +41,7 @@ The prompt should indicate the following workflow item in addition to the task d
 
 - Only after the user has confirmed the task is done, run this checklist:
 
-    1. **status.md** — remove the item from Open; add any newly discovered open items; increment the Task Counter by 1.
+    1. **status.md** — mark the item relating to the completed task as done; add any newly discovered open items; increment the Task Counter by 1.
     2. **manifest.md** — add a row for every new file created; remove rows for deleted files.
     3. **cdoc coverage** — run `python scripts/check_cdoc_coverage.py` from the repo root. Add any `UNCOVERED` files to the appropriate cdoc's `sources` list, or create a new cdoc if no suitable one exists.
     4. **context docs** — Read cdoc.md. Update appropriate context documents.

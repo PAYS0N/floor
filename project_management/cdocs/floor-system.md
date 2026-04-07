@@ -34,6 +34,14 @@ The template ships these file groups:
 - **project_management/prompts/** — Reusable prompts (e.g. architecture health check). Consume standards, never define them.
 - **scripts/** — Python tooling scripts. `hash_util.py` is a shared utility module (no shebang, declares `__all__`); `check_cdocs.py` detects stale cdocs by hashing source files declared in cdoc frontmatter; `check_manifest.py` audits `manifest.md` for file coverage (MISSING and DEAD entries); `check_cdoc_coverage.py` reports repo files not declared as a source in any cdoc (UNCOVERED entries).
 
+## Agent Types
+
+Three distinct Claude session types operate in this workflow. See `cdocs/agents-and-roles.md` for full role descriptions, break points, and correction mechanisms.
+
+- **Prompting agent** — the session in the user's active project; generates task or architecture check prompts.
+- **Task agent** — a fresh session; implements a specific task prompt end-to-end.
+- **Architecture check agent** — a fresh session; runs the architecture health check when the Task Counter reaches 10.
+
 ## System Flow
 
 1. **Copy template** — User copies `floor/` into a new project repo.

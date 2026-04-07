@@ -20,6 +20,8 @@ The prompt should include only the cdocs relevant to the task — do not by  def
 | Task involves... | Load these cdocs |
 |-----------------|-----------------|
 | Template structure, design decisions, what Floor is/isn't | `cdocs/floor-system.md` |
+| Agent roles, workflow flow, break points, correction mechanisms | `cdocs/agents-and-roles.md` |
+| Scripts (check_cdocs, check_manifest, check_cdoc_coverage, hash_util) | `cdocs/scripts-and-checks.md` |
 
 Where applicable, the prompt should indicate that project_management/standards/style.md should be followed when coding.
 Where the task involves creating new files, adding imports, or changing module responsibilities, the prompt should indicate that project_management/standards/architecture.md should be read before planning.
@@ -34,7 +36,7 @@ The prompt should indicate the following workflow item in addition to the task d
 
 - Only after the user has confirmed the task is done, run this checklist:
 
-    1. **status.md** — remove the item from Open; add any newly discovered open items; increment the Task Counter by 1.
+    1. **status.md** — mark the item relating to the completed task as done; add any newly discovered open items; increment the Task Counter by 1.
     2. **manifest.md** — add a row for every new file created; remove rows for deleted files.
     3. **context docs** — Read cdoc.md. Update appropriate context documents.
     4. **response to user** - Remind the user to make a git commit

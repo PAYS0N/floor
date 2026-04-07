@@ -16,6 +16,8 @@
 | [project_management/prompts/architecture-check.md](prompts/architecture-check.md) | Periodic health check prompt: map current architecture, run forbidden pattern checks, compare to baseline, produce verdict |
 | [project_management/architecture-baseline.md](architecture-baseline.md) | Architecture dependency graph snapshot; updated on each health check pass |
 | [project_management/cdocs/floor-system.md](cdocs/floor-system.md) | Context document: what Floor is, its structure, key design decisions, and boundaries |
+| [project_management/cdocs/agents-and-roles.md](cdocs/agents-and-roles.md) | Context document: the three agent types, user responsibilities, workflow break points, and correction mechanisms |
+| [project_management/cdocs/scripts-and-checks.md](cdocs/scripts-and-checks.md) | Context document: each Floor script's role, invocation point, output, and edge case behavior |
 
 ---
 
