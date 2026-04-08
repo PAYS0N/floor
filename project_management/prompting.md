@@ -1,5 +1,7 @@
 # Pre-prompt
-Before composing the prompt: check the Task Counter in `project_management/status.md`. If the counter is 10 or greater, generate the architecture check prompt from `project_management/prompts/architecture-check.md` instead of a task prompt. Do not proceed with the steps below.
+Before composing the prompt: run `python scripts/task_counter.py read` from the repo root to get the current Task Counter value. If the counter is 10 or greater, generate the architecture check prompt from `project_management/prompts/architecture-check.md` instead of a task prompt. Do not proceed with the steps below.
+
+Run `python scripts/check_cdocs.py` from the repo root. If any cdocs are reported as STALE that would be part of the prompt, include a note in the generated prompt alerting the agent that those cdocs may not reflect the current source files. Do not stop — continue composing the prompt normally.
 
 # Prompt instructions
 Indicate the Claude model best suited for the task, not as part of the prompt.
@@ -36,8 +38,9 @@ The prompt should indicate the following workflow item in addition to the task d
 
 - Only after the user has confirmed the task is done, run this checklist:
 
-    1. **status.md** — mark the item relating to the completed task as done; add any newly discovered open items; increment the Task Counter by 1.
+    1. **status.md** — mark the item relating to the completed task as done; add any newly discovered open items; run `python scripts/task_counter.py increment` from the repo root
     2. **manifest.md** — add a row for every new file created; remove rows for deleted files.
-    3. **context docs** — Read cdoc.md. Update appropriate context documents.
-    4. **response to user** - Remind the user to make a git commit
+    3. **cdoc coverage** — run `python scripts/check_cdoc_coverage.py` from the repo root. Add any `UNCOVERED` files to the appropriate cdoc's `sources` list, or create a new cdoc if no suitable one exists.
+    4. **context docs** — Read cdoc.md. Update appropriate context documents.
+    5. **response to user** - Remind the user to make a git commit
 

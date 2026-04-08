@@ -1,11 +1,5 @@
 # Project Status
 
-## Task Counter
-
-8
-
-<!-- Reset by architecture health check — 2026-04-02 -->
-
 Project tasks are managed centrally via the personal assistant CLI:
 
     /home/payson/Documents/repos/self/personal-assistant/scripts/project_tasks_cli.py

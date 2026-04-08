@@ -1,6 +1,6 @@
 ## Project Summary
 
-Read project_management/manifest.md.
+Do not skip this step; Read project_management/manifest.md.
 
 Floor is a project management template system for AI-assisted software development, providing structured conventions, standards, and prompts that give Claude consistent context across sessions.
 

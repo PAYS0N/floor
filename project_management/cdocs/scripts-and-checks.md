@@ -4,6 +4,7 @@ sources:
   - floor/scripts/check_cdocs.py
   - floor/scripts/check_manifest.py
   - floor/scripts/check_cdoc_coverage.py
+  - floor/scripts/task_counter.py
 ---
 
 # Scripts and Checks
@@ -25,3 +26,7 @@ Audits `project_management/manifest.md` for file coverage. MISSING: a file exist
 ## check_cdoc_coverage.py
 
 Run by the task agent as step 3 of the post-task checklist. Reports UNCOVERED: repo files not declared as a source in any cdoc's `sources:` list. The task agent adds uncovered files to the appropriate cdoc's source list, or creates a new cdoc if no suitable one exists.
+
+## task_counter.py
+
+Runnable script. Manages the Task Counter: a plain integer stored in `project_management/task_counter.txt`. A missing file is treated as 0. Operations: `read` (print current value), `increment` (add 1 and print new value), `reset` (set to 0). Accepts `--repo-root` (default: `.`). Called by the prompting agent before composing each prompt (to check whether the counter is ≥ 10) and by the task agent after user confirmation (to increment on task completion). The architecture check agent calls `reset` after a PASS or PASS WITH NOTES verdict.
