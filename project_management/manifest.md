@@ -22,6 +22,14 @@
 | [project_management/cdocs/floor-system.md](cdocs/floor-system.md) | Context document: what Floor is, its structure, key design decisions, and boundaries |
 | [project_management/cdocs/agents-and-roles.md](cdocs/agents-and-roles.md) | Context document: the three agent types, user responsibilities, workflow break points, and correction mechanisms |
 | [project_management/cdocs/scripts-and-checks.md](cdocs/scripts-and-checks.md) | Context document: each Floor script's role, invocation point, output, and edge case behavior |
+| [project_management/cdoc_hashes.json](cdoc_hashes.json) | Generated hash store for check_cdocs.py; tracks per-cdoc source file hashes |
+| [project_management/task_counter.txt](task_counter.txt) | Generated counter file; stores the current Task Counter value as a plain integer |
+| [project_management/cdocs/01-task-lifecycle.mermaid](cdocs/01-task-lifecycle.mermaid) | Mermaid diagram: full task lifecycle from user request to git commit - stale snapshot|
+| [project_management/cdocs/02-pre-prompt-decision-tree.mermaid](cdocs/02-pre-prompt-decision-tree.mermaid) | Mermaid diagram: pre-prompt decision tree for the prompting agent session - stale snapshot|
+| [project_management/cdocs/03-post-task-cleanup.mermaid](cdocs/03-post-task-cleanup.mermaid) | Mermaid diagram: post-task cleanup checklist steps run by the task agent - stale snapshot|
+| [project_management/cdocs/04-architecture-health-check.mermaid](cdocs/04-architecture-health-check.mermaid) | Mermaid diagram: architecture health check 8-step process - stale snapshot|
+| [project_management/cdocs/05-error-mitigation-map.mermaid](cdocs/05-error-mitigation-map.mermaid) | Mermaid diagram: error and mitigation map for the Floor workflow - stale snapshot|
+| [.gitignore](.gitignore) | Git ignore rules for the repository |
 
 ---
 
@@ -44,11 +52,3 @@
 | [floor/scripts/check_manifest.py](../floor/scripts/check_manifest.py) | Audits manifest.md for file coverage: reports files missing from the manifest and dead manifest entries |
 | [floor/scripts/check_cdoc_coverage.py](../floor/scripts/check_cdoc_coverage.py) | Reports repo files not declared as a source in any cdoc; wired into the post-task cleanup checklist |
 | [floor/scripts/task_counter.py](../floor/scripts/task_counter.py) | Manages the Task Counter: read, increment, and reset operations; stores value in project_management/task_counter.txt |
-| [project_management/cdoc_hashes.json](cdoc_hashes.json) | Generated hash store for check_cdocs.py; tracks per-cdoc source file hashes |
-| [project_management/task_counter.txt](task_counter.txt) | Generated counter file; stores the current Task Counter value as a plain integer |
-| [project_management/cdocs/01-task-lifecycle.mermaid](cdocs/01-task-lifecycle.mermaid) | Mermaid diagram: full task lifecycle from user request to git commit |
-| [project_management/cdocs/02-pre-prompt-decision-tree.mermaid](cdocs/02-pre-prompt-decision-tree.mermaid) | Mermaid diagram: pre-prompt decision tree for the prompting agent session |
-| [project_management/cdocs/03-post-task-cleanup.mermaid](cdocs/03-post-task-cleanup.mermaid) | Mermaid diagram: post-task cleanup checklist steps run by the task agent |
-| [project_management/cdocs/04-architecture-health-check.mermaid](cdocs/04-architecture-health-check.mermaid) | Mermaid diagram: architecture health check 8-step process |
-| [project_management/cdocs/05-error-mitigation-map.mermaid](cdocs/05-error-mitigation-map.mermaid) | Mermaid diagram: error and mitigation map for the Floor workflow |
-| [.gitignore](.gitignore) | Git ignore rules for the repository |
