@@ -6,7 +6,7 @@ Gathers context (cdoc staleness, status items, prompting instructions),
 assembles a base prompt, and launches an interactive Claude CLI session
 for prompt iteration.
 
-Usage: python project_management/scripts/floor.py "<task description>"
+Usage: python3 project_management/scripts/floor.py "<task description>"
 
 Exit codes:
   0 — success (or arch-check gate triggered)
@@ -101,7 +101,7 @@ def assemble_prompt(task_description, prompting_text, cdocs_output, status_text)
 # ── Status resolution ────────────────────────────────────────────────────────
 
 CLI_PATH_RE = re.compile(r"(/\S+/project_tasks_cli\.py)")
-PROJECT_NAME_RE = re.compile(r"project_tasks_cli\.py\s+\w+\s+(\S+)")
+PROJECT_NAME_RE = re.compile(r"project_tasks_cli\.py\s+(list|add|complete|update|delete)\s+(\w+)")
 
 
 def detect_status_cli(status_text):
@@ -116,7 +116,7 @@ def detect_status_cli(status_text):
   project_match = PROJECT_NAME_RE.search(status_text)
   if not project_match:
     return None, None
-  return cli_path, project_match.group(1)
+  return cli_path, project_match.group(2)
 
 
 def resolve_status(repo_root):
@@ -126,6 +126,7 @@ def resolve_status(repo_root):
   if status_text is None:
     return None
   cli_path, project = detect_status_cli(status_text)
+  debug_log = f"cli_path={cli_path}, project={project}\n"
   if cli_path is None:
     return status_text
   try:
@@ -137,8 +138,10 @@ def resolve_status(repo_root):
     )
     if result.returncode == 0 and result.stdout.strip():
       return result.stdout.strip()
+    debug_log += f"subprocess failed: returncode={result.returncode}, stdout={result.stdout}, stderr={result.stderr}\n"
   except (OSError, subprocess.TimeoutExpired) as exc:
-    print(f"warning: could not run status CLI: {exc}", file=sys.stderr)
+    debug_log += f"subprocess exception: {exc}\n"
+  Path("/tmp/floor_debug.txt").write_text(debug_log, encoding="utf-8")
   return status_text
 
 
