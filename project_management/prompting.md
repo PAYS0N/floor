@@ -1,46 +1,25 @@
-# Pre-prompt
-Before composing the prompt: run `python scripts/task_counter.py read` from the repo root to get the current Task Counter value. If the counter is 10 or greater, generate the architecture check prompt from `project_management/prompts/architecture-check.md` instead of a task prompt. Do not proceed with the steps below.
+Compose a prompt for a new Claude Code session to implement the task. The prompt must:
 
-Run `python scripts/check_cdocs.py` from the repo root. If any cdocs are reported as STALE that would be part of the prompt, include a note in the generated prompt alerting the agent that those cdocs may not reflect the current source files. Do not stop — continue composing the prompt normally.
+1. Include an instruction to read `project_management/manifest.md` before proceeding.
+2. Require the plan to be presented first, before any code changes.
+3. Include only the cdocs relevant to the task — use the routing table below.
+4. Where applicable, direct the agent to follow `project_management/standards/style.md`.
+5. Where the task involves creating new files, adding imports, or changing module responsibilities, direct the agent to read `project_management/standards/architecture.md` before planning.
 
-# Prompt instructions
-Indicate the Claude model best suited for the task, not as part of the prompt.
-The created prompt should be output to the user, not a markdown doc.
+## Interview the user if necessary
 
-# Compose task prompt
-Compose a prompt for a new session task to do the indicated work item.
-The prompt should indicate that the plan must be presented first, before code changes.
+If management decisions must be made before the prompt can be composed, ask the user — do not decide yourself.
 
-# Interview user if neccessary - Q&A
-If there are management decisions that need to be made before the prompt can be created, ask the user, don't decide yourself.
-
-# Include context
-Include all the context someone would need, both code files and cdocs.
-The prompt should always include an instruction to read project_management/manifest.md.
-The prompt should include only the cdocs relevant to the task — do not by  default load all cdocs. Use the table below to decide which to include:
+## Cdoc routing table
 
 | Task involves... | Load these cdocs |
 |-----------------|-----------------|
 | Template structure, design decisions, what Floor is/isn't | `cdocs/floor-system.md` |
 | Agent roles, workflow flow, break points, correction mechanisms | `cdocs/agents-and-roles.md` |
-| Scripts (check_cdocs, check_manifest, check_cdoc_coverage, hash_util) | `cdocs/scripts-and-checks.md` |
+| Orchestration scripts (floor.py, shutdown.py) | `cdocs/scripts-orchestration.md` |
+| Check scripts and utilities (check_cdocs, check_manifest, check_cdoc_coverage, hash_util, task_counter) | `cdocs/scripts-and-checks.md` |
+| Template scaffolding (cdoc.md, project-overview.md, status.md) | `cdocs/template-scaffolding.md` |
 
-Where applicable, the prompt should indicate that project_management/standards/style.md should be followed when coding.
-Where the task involves creating new files, adding imports, or changing module responsibilities, the prompt should indicate that project_management/standards/architecture.md should be read before planning.
+## Model recommendation
 
-# Close prompt
-The prompt should indicate the following workflow item in addition to the task definition:
-
-- When implementation is complete (task description fully implemented), before waiting for user confirmation:
-    1. Write a brief summary of what was done.
-    2. List suggested test steps for the user to verify the work — make clear that running tests is the user's responsibility, not the agent's.
-    3. Explicitly pause and wait for the user to confirm the task is done.
-
-- Only after the user has confirmed the task is done, run this checklist:
-
-    1. **status.md** — mark the item relating to the completed task as done; add any newly discovered open items; run `python scripts/task_counter.py increment` from the repo root
-    2. **manifest.md** — add a row for every new file created; remove rows for deleted files.
-    3. **cdoc coverage** — run `python scripts/check_cdoc_coverage.py` from the repo root. Add any `UNCOVERED` files to the appropriate cdoc's `sources` list, or create a new cdoc if no suitable one exists.
-    4. **context docs** — Read cdoc.md. Update appropriate context documents.
-    5. **response to user** - Remind the user to make a git commit
-
+After composing the prompt, indicate the Claude model best suited for the task. This is guidance for the user, not part of the prompt itself.

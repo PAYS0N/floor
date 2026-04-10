@@ -25,6 +25,7 @@ DEFAULT_EXCLUDES = [
   "project_management",
   "scripts",
   "CLAUDE.md",
+  ".gitignore",
 ]
 
 

@@ -7,7 +7,7 @@ sources:
   - floor/scripts/task_counter.py
 ---
 
-# Scripts and Checks
+# Scripts — Checks and Utilities
 
 All scripts live in `floor/scripts/`. Two categories: utility modules (no shebang, declare `__all__`) and runnable scripts (shebang + `main()`). Scripts may import from utility modules in the same directory; scripts must not import from other scripts.
 
@@ -17,16 +17,16 @@ Utility module. Provides SHA-256 hashing (`text_sha256`), YAML frontmatter parsi
 
 ## check_cdocs.py
 
-Invoked by the prompting agent before composing each task prompt. Reads the `sources:` list from each cdoc's YAML frontmatter, computes an aggregate SHA-256 hash of those files, and compares against stored hashes in `project_management/cdoc_hashes.json`. Reports per cdoc: STALE, fresh, or new. Updates the hash store on every run. A stale cdoc whose own content is unchanged retains its old source hash — the stale signal persists until the cdoc content is also updated.
+Run by `floor.py` before prompt assembly and by `shutdown.py` post-task. Reads the `sources:` list from each cdoc's YAML frontmatter, computes an aggregate SHA-256 hash, and compares against stored hashes in `project_management/cdoc_hashes.json`. Reports per cdoc: STALE, fresh, or new. A stale cdoc whose own content is unchanged retains its old source hash — the stale signal persists until the cdoc content is also updated. Also validates cdoc size limits: warns on > 6 sources or > 70 lines.
 
 ## check_manifest.py
 
-Audits `project_management/manifest.md` for file coverage. MISSING: a file exists on disk but has no manifest entry. DEAD: a manifest entry references a file that does not exist on disk. Run ad-hoc by the user from the repo root.
+Run by `shutdown.py` post-task. Audits `project_management/manifest.md` for file coverage. MISSING: file exists on disk but has no manifest entry. DEAD: manifest entry references a nonexistent file.
 
 ## check_cdoc_coverage.py
 
-Run by the task agent as step 3 of the post-task checklist. Reports UNCOVERED: repo files not declared as a source in any cdoc's `sources:` list. The task agent adds uncovered files to the appropriate cdoc's source list, or creates a new cdoc if no suitable one exists.
+Run by `shutdown.py` post-task. Reports UNCOVERED: repo files not declared as a source in any cdoc's `sources:` list.
 
 ## task_counter.py
 
-Runnable script. Manages the Task Counter: a plain integer stored in `project_management/task_counter.txt`. A missing file is treated as 0. Operations: `read` (print current value), `increment` (add 1 and print new value), `reset` (set to 0). Accepts `--repo-root` (default: `.`). Called by the prompting agent before composing each prompt (to check whether the counter is ≥ 10) and by the task agent after user confirmation (to increment on task completion). The architecture check agent calls `reset` after a PASS or PASS WITH NOTES verdict.
+Manages the Task Counter: a plain integer in `project_management/task_counter.txt`. A missing file is treated as 0. Operations: `read`, `increment`, `reset`. Called by `floor.py` (arch gate check) and `shutdown.py` (increment). The architecture check agent calls `reset` after a PASS verdict.

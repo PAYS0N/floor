@@ -1,69 +1,40 @@
 ---
 sources:
-  - floor/scripts/hash_util.py
-  - floor/scripts/check_cdocs.py
-  - floor/scripts/check_manifest.py
-  - floor/scripts/check_cdoc_coverage.py
-  - .gitignore
   - floor/CLAUDE.md
   - floor/setup.md
-  - floor/project_management/cdoc.md
-  - floor/project_management/manifest.md
   - floor/project_management/prompting.md
-  - floor/project_management/status.md
+  - floor/project_management/manifest.md
   - floor/project_management/standards/architecture.md
   - floor/project_management/standards/style.md
-  - floor/project_management/cdocs/project-overview.md
-  - floor/project_management/prompts/architecture-check.md
 ---
 
 # Floor — System Context
 
 ## What Floor Is
 
-Floor is a project management template system for AI-assisted development. It provides a set of markdown files that give Claude structured, consistent context across sessions. The template is copied into a new project and customized via a setup checklist.
+Floor is a project management template system for AI-assisted development. It provides markdown files and Python scripts that give Claude structured, consistent context across sessions. The template is copied into a new project and customized via a setup checklist.
 
 ## Structure
 
-The template lives in `floor/`. Everything at the repo root is the management system for developing Floor itself — Floor managing its own development.
+The template lives in `floor/`. Everything at the repo root manages Floor's own development.
 
 The template ships these file groups:
-- **CLAUDE.md** — Session entry point. Points Claude to the manifest and defines behavioral rules.
-- **project_management/** — Manifest (file index), status (work tracking), cdoc/prompting templates (meta-templates for generating context docs and task prompts).
-- **project_management/artifacts/** — Structured reference data produced by the architecture health check: `architecture-baseline.md` (module summary + diagram index) and four `.mermaid` files (one per diagram type). Generated outputs; not cdocs; not edited manually.
-- **project_management/standards/** — Style guide and architecture conventions. These are the enforceable rules.
-- **project_management/prompts/** — Reusable prompts (e.g. architecture health check). Consume standards, never define them.
-- **scripts/** — Python tooling scripts. `hash_util.py` is a shared utility module (no shebang, declares `__all__`); `check_cdocs.py` detects stale cdocs by hashing source files declared in cdoc frontmatter; `check_manifest.py` audits `manifest.md` for file coverage (MISSING and DEAD entries); `check_cdoc_coverage.py` reports repo files not declared as a source in any cdoc (UNCOVERED entries).
+- **CLAUDE.md** — Session entry point. Defines the "implement" response rule.
+- **project_management/** — Manifest, status, cdoc/prompting templates, standards, prompts, artifacts.
+- **scripts/** — Python tooling. `floor.py` (CLI entry), `shutdown.py` (post-task), check scripts, utilities.
 
-## Agent Types
+## Core Flow
 
-Three distinct Claude session types operate in this workflow. See `cdocs/agents-and-roles.md` for full role descriptions, break points, and correction mechanisms.
+Scripts orchestrate agents, not the other way around.
 
-- **Prompting agent** — the session in the user's active project; generates task or architecture check prompts.
-- **Task agent** — a fresh session; implements a specific task prompt end-to-end.
-- **Architecture check agent** — a fresh session; runs the architecture health check when the Task Counter reaches 10.
-
-## System Flow
-
-1. **Copy template** — User copies `floor/` into a new project repo.
-2. **Run setup** — User works through `setup.md`, filling in project-specific placeholders in CLAUDE.md, prompting.md, style.md, architecture.md, and architecture-check.md. The architecture.md setup block includes a project-type orientation step that guides the user to identify their project type, select a layer scheme, choose graph types for the health check, and evaluate which universal rules apply. When done, setup.md is deleted.
-3. **User requests a task** — User describes a feature or change to Claude in the project session.
-4. **Claude reads prompting.md** — CLAUDE.md's response rule triggers this unconditionally before any other action. Claude runs `scripts/check_cdocs.py` to detect stale cdocs, then checks the Task Counter in status.md: if ≥ 10, it generates an architecture health check prompt from architecture-check.md instead of a task prompt and stops.
-5. **Claude interviews user if needed** — If management decisions must be made before the prompt can be composed, Claude asks rather than deciding.
-6. **Claude selects context** — Using the cdoc routing table in prompting.md, Claude selects only the context documents relevant to the task domain.
-7. **Prompt is output to user** — Claude produces a complete prompt text (not a file) containing: the manifest.md read instruction, selected cdocs, the task description, a plan-first requirement, applicable standards references, and the close-prompt workflow checklist. Claude also indicates the recommended Claude model.
-8. **User pastes prompt into a new agent session** — The user manually opens a fresh Claude session and pastes the generated prompt.
-9. **Agent reads context** — The agent reads manifest.md and all specified cdocs to build its working context.
-10. **Agent presents plan** — Before touching any files, the agent lays out its implementation approach and waits for implicit or explicit approval.
-11. **Agent implements** — Agent makes changes, following style.md conventions and checking architecture.md before creating files, adding imports, or shifting module responsibilities.
-12. **Agent pauses for user confirmation** — Agent writes a brief summary of what was done, lists test steps for the user to run (making clear testing is the user's responsibility), and explicitly waits.
-13. **User verifies and confirms** — User runs the suggested tests and tells the agent the task is complete.
-14. **Agent updates management files** — Agent removes the item from Open in status.md (adds any newly discovered items, increments Task Counter), updates manifest.md rows for created or deleted files, runs `check_cdoc_coverage.py` and adds any UNCOVERED files to the appropriate cdoc's sources, and updates the relevant cdocs to reflect current system state. On architecture health check: overwrites `artifacts/architecture-baseline.md` and all four `.mermaid` files in `artifacts/`; resets Task Counter to 0.
-15. **Agent reminds user to commit** — Final output is a reminder to make a git commit.
+1. **`floor.py "<task>"`** — Checks arch gate, gathers context, launches interactive Claude CLI session for prompt iteration.
+2. **Prompting session** — User iterates with Claude. Final prompt written to `prompts/implement-this.md`.
+3. **User says "implement"** — CLAUDE.md response rule fires. Plan-first implementation.
+4. **User confirms** — Claude runs `shutdown.py`. Structured results guide doc updates.
 
 ## Key Design Decisions
 
-- **Python tooling** Floor ships Python scripts in `floor/scripts/` for tasks that require computation (e.g. hashing). Python was chosen for cross-platform compatibility and zero OS-specific deps.
-- **Templates are the product.** Changes to files in `floor/` are what ship. The root-level management files describe and support them.
-- **Minimum viable context.** Prompts should give agents only what they need. This is both a design principle and a documented style rule.
-- **Setup-then-delete.** New projects run `setup.md` to customize placeholders, then delete it. Setup is considered complete — not partially deferred — when the checklist is done.
+- **Scripts orchestrate agents.** `floor.py` and `shutdown.py` set boundaries; agents execute within them.
+- **Templates are the product.** Files in `floor/` are what ship.
+- **Minimum viable context.** Prompts give agents only what they need.
+- **Setup-then-delete.** `setup.md` customizes placeholders, then is deleted.
