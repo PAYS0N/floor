@@ -8,7 +8,7 @@ Read project_management/manifest.md.
 
 ## Response rules
 
-- When the user says "implement" or "implement <file>.md": read the specified prompt file (default: `project_management/prompts/implement-this.md`), implement the task described in it (plan-first, work with the user), then after the user confirms completion, run `python scripts/shutdown.py` from the repo root and follow its output to update all flagged documentation.
+- When the user says "implement" or "implement <file>.md": read the specified prompt file (default: `project_management/prompts/implement-this.md`), implement the task described in it (plan-first, work with the user), then after the user confirms completion, run `python project_management/scripts/shutdown.py` from the repo root and follow its output to update all flagged documentation.
 
 ## Meta rules
 

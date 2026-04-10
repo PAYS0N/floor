@@ -1,10 +1,10 @@
 # Architecture Health Check Prompt
 
-Read `project_management/manifest.md` before proceeding.
+Read `project_management/manifest.md` and all cdocs before proceeding.
 
 ## Task
 
-Perform a full architectural health check on the Floor project. Present all findings before making any changes.
+Perform a full architectural health check on the Floor codebase. Present all findings before making any changes.
 
 ### Step 1 — Read Standards
 
@@ -14,38 +14,45 @@ If no baseline exists yet, note that this run will produce the initial baseline 
 
 ### Step 2 — Map Current Architecture
 
-Read every file in `floor/`. For each file, record:
-- All references to other files (e.g. "read X", links, directives)
-- Whether it modifies shared state (`status.md`, `manifest.md`, template files in `floor/`)
+Read every `.py` file in `project_management/scripts/`. For each file, record:
+- All explicit imports from other project scripts (e.g., `from hash_util import`)
+- Whether it invokes other scripts via subprocess
+- Whether it writes to shared state files (task_counter.txt, cdoc_hashes.json, .floor_session.json)
 - Its approximate line count
 
 ### Step 3 — Generate Current Diagram
 
-From the reference map, produce four Mermaid diagrams matching the structure of the files in `project_management/artifacts/`, if they exist:
+Produce one Mermaid diagram per file in `project_management/artifacts/` (if it exists), using the graph types listed below. If the current state reveals structure not captured by these types, add additional diagram files as needed — do not omit structure that the listed types cannot express.
 
-- `01-module-dependency.mermaid` — file-to-file edges (read, write, ref)
-- `02-layer-hierarchy.mermaid` — permitted reference directions by layer
-- `03-state-mutation.mermaid` — which agents mutate which shared state
-- `04-user-task-flow.mermaid` — end-to-end developer workflow sequence
+Graph types for this project (one file each):
+- **Module Dependency Graph** — `01-module-dependency.mermaid` — shows which scripts import or invoke which others
+- **Layered Architecture** — `02-layer-hierarchy.mermaid` — shows scripts organized by layer with permitted reference directions
+- **State Mutation Flow** — `03-state-mutation.mermaid` — shows which modules write to shared state files
+- **User Flow** — `04-user-task-flow.mermaid` — shows how users invoke the full task flow and which checks get triggered
 
-Also update the Module Summary table for `artifacts/architecture-baseline.md`.
+Update the Module Summary table for `project_management/artifacts/architecture-baseline.md`.
 
 ### Step 4 — Run Forbidden Pattern Checks
 
-No forbidden patterns yet. Skip this step.
+Execute each check below. Report pass/fail for each. For manual review steps, describe what was checked and what was found.
+
+- **F1**: `rg "import subprocess" project_management/scripts/ | grep -v -E "(floor|shutdown)\.py"` — should return nothing
+- **F2**: `rg "^from (floor|shutdown|check_)" project_management/scripts/task_counter.py project_management/scripts/hash_util.py` — should return nothing
+- **F3**: `rg "^(from|import) " project_management/scripts/hash_util.py | grep -v -E "^(import hashlib|from pathlib)"` — should return nothing
+- **F4**: Review dependency graph for cycles
 
 ### Step 5 — Run Build & Lint
 
-No automated build or lint commands yet. Skip this step until tooling is added.
+Run `python3 -m py_compile project_management/scripts/*.py` to verify syntax. Report any errors or warnings.
 
 ### Step 6 — Compare to Baseline
 
 If a baseline exists, diff the current diagram against it. Flag:
-- New references (file-to-file links that didn't exist in the baseline)
-- Removed references
-- New files or removed files
-- Any reference that violates the layer hierarchy (upward reference)
-- Any file whose responsibility has shifted
+- New dependencies (imports that didn't exist in the baseline)
+- Removed dependencies
+- New modules or removed modules
+- Any dependency that violates the layer hierarchy (upward import)
+- Any module whose responsibility has shifted (e.g., a read-only module now mutating state)
 
 If no baseline exists, note that this is the initial run and skip this step.
 
@@ -55,11 +62,11 @@ Produce a verdict:
 
 **PASS** — No violations found. Architecture matches conventions. Update the baseline date.
 
-**PASS WITH NOTES** — No violations, but there are new references or structural changes that are intentional and conform to conventions. List the changes. Update the baseline to reflect them.
+**PASS WITH NOTES** — No violations, but there are new dependencies or structural changes that are intentional and conform to conventions. List the changes. Update the baseline to reflect them.
 
 **FAIL** — One or more violations found. List each violation with:
 - Which rule was broken (reference the F-number or convention)
-- Which file
+- Which file and line
 - Suggested fix
 
 Do not update the baseline when the verdict is FAIL.
@@ -72,4 +79,4 @@ Overwrite each diagram file in `project_management/artifacts/` with the newly ge
 
 If the verdict is PASS WITH NOTES, add a "Ratified Changes" section to `architecture-baseline.md` listing what changed and why.
 
-Run `python floor/scripts/task_counter.py reset` from the repo root to reset the Task Counter to 0.
+Run `python project_management/scripts/task_counter.py reset`

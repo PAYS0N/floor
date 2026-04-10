@@ -14,11 +14,10 @@ If management decisions must be made before the prompt can be composed, ask the 
 
 | Task involves... | Load these cdocs |
 |-----------------|-----------------|
-| Template structure, design decisions, what Floor is/isn't | `cdocs/floor-system.md` |
-| Agent roles, workflow flow, break points, correction mechanisms | `cdocs/agents-and-roles.md` |
-| Orchestration scripts (floor.py, shutdown.py) | `cdocs/scripts-orchestration.md` |
-| Check scripts and utilities (check_cdocs, check_manifest, check_cdoc_coverage, hash_util, task_counter) | `cdocs/scripts-and-checks.md` |
-| Template scaffolding (cdoc.md, project-overview.md, status.md) | `cdocs/template-scaffolding.md` |
+| Framework structure, conventions, project management | `cdocs/floor-system.md` |
+| Scripts, automation, task lifecycle | `cdocs/scripts-orchestration.md`, `cdocs/scripts-and-checks.md` |
+| Agent roles, responsibilities, workflow | `cdocs/agents-and-roles.md` |
+| Template scaffolding, onboarding | `cdocs/template-scaffolding.md` |
 
 ## Model recommendation
 

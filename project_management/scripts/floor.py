@@ -6,7 +6,7 @@ Gathers context (cdoc staleness, status items, prompting instructions),
 assembles a base prompt, and launches an interactive Claude CLI session
 for prompt iteration.
 
-Usage: python scripts/floor.py "<task description>"
+Usage: python project_management/scripts/floor.py "<task description>"
 
 Exit codes:
   0 — success (or arch-check gate triggered)
@@ -26,8 +26,8 @@ PROMPTING_PATH = "project_management/prompting.md"
 STATUS_PATH = "project_management/status.md"
 SESSION_FILE = ".floor_session.json"
 PROMPT_OUTPUT_PATH = "project_management/prompts/implement-this.md"
-TASK_COUNTER_SCRIPT = "scripts/task_counter.py"
-CHECK_CDOCS_SCRIPT = "scripts/check_cdocs.py"
+TASK_COUNTER_SCRIPT = "project_management/scripts/task_counter.py"
+CHECK_CDOCS_SCRIPT = "project_management/scripts/check_cdocs.py"
 ARCH_CHECK_THRESHOLD = 10
 
 

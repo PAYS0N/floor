@@ -2,7 +2,7 @@
 
 # Architecture Health Check Prompt
 
-Read `project_management/manifest.md` before proceeding.
+Read `project_management/manifest.md` and all cdocs before proceeding.
 
 ## Task
 
@@ -80,4 +80,4 @@ Overwrite each diagram file in `project_management/artifacts/` with the newly ge
 
 If the verdict is PASS WITH NOTES, add a "Ratified Changes" section to `architecture-baseline.md` listing what changed and why.
 
-Run `python scripts/task_counter.py reset`
+Run `python project_management/scripts/task_counter.py reset`

@@ -5,45 +5,49 @@
       "floor/CLAUDE.md": "c959d6cba73fc4d22de4bf74b9f4bb49823b0e51e76764280be2b41e27632bef",
       "floor/project_management/prompting.md": "132d581c066144fd5ac68c0e841b7f8d9ea12c26ad8eb6e0a8c4f66b396ed968",
       "floor/project_management/prompts/architecture-check.md": "f715b0d480aac99d5b6960fea3acc1813294eb02c1308eb9f3204f875de81b66",
-      "floor/scripts/floor.py": "16f3bdb994e393b4957842339004c2deee1e8e62981506c481ac25842309b068",
-      "floor/scripts/shutdown.py": "47855f574cf1aaf8b082430ec866334f53c4900e6ffc82cab0242b43c5ada73e"
+      "floor/scripts/floor.py": "97c6a9e7aaa087fce2366de5fdacacf934da9481cc00a132bd6d00263130bd70",
+      "floor/scripts/shutdown.py": "01b1be45adc3339c38169b75bc1bfe57ac8f406cd10dbcb9e02683d72f2c174c"
     },
-    "source_hash": "f6ea8c2f36987658a153c1025ca40e11e6e027966f76083c4143a8ac4c55dab4"
+    "source_hash": "dc4426e0c5e794a67afd670632e1c0962a1971506af8cdb116d322ca8e630045"
   },
   "project_management/cdocs/floor-system.md": {
-    "content_hash": "a8a9731b41454bb9df75a11bad2e49d59bcb10ccf00f46c77d7611ba94f63cf6",
+    "content_hash": "3185695b1d9788045ef133ac54002c145f42173d720151a460cff4eb7f39e4d7",
     "source_file_hashes": {
-      ".gitignore": "4b0c041b010b240b18e124541d2ecfb95c1a21a20cb2ed8ee555f5bfe95b898e",
       "floor/CLAUDE.md": "c959d6cba73fc4d22de4bf74b9f4bb49823b0e51e76764280be2b41e27632bef",
-      "floor/project_management/cdoc.md": "41761a77a65dcc565a565366c3418bff267da3cd98111f0ececd0a21acdfded2",
-      "floor/project_management/cdocs/project-overview.md": "f5e415327a900b8d4e2fcae2bc28a821c16efcf4512e6f334210cd1995377af7",
       "floor/project_management/manifest.md": "54e51d58fb88d293b30c0af326d3b66bb03fabf9b3e5f597a343d4b8d60c958a",
       "floor/project_management/prompting.md": "132d581c066144fd5ac68c0e841b7f8d9ea12c26ad8eb6e0a8c4f66b396ed968",
-      "floor/project_management/prompts/architecture-check.md": "f715b0d480aac99d5b6960fea3acc1813294eb02c1308eb9f3204f875de81b66",
       "floor/project_management/standards/architecture.md": "d861b38731fdd3ab6c5f8140a708fd796a43ebb0770a42784c24fc7a8f4ed4d9",
       "floor/project_management/standards/style.md": "c1d68940a793fb08ff52c11c8b2502a4c32dd3c56ef66c44ed3367bc1824d2ad",
-      "floor/project_management/status.md": "e53478bfa8558c561401cf952071cb01bcce41f443b7dd5ec9a7fbff1b71b3b3",
-      "floor/scripts/check_cdoc_coverage.py": "40b8032d39518e7ab6a94431aaec2c57998e77f81f7b54127ab3a59c1c93546e",
-      "floor/scripts/check_cdocs.py": "8400824eb965b0270eab17b135d72fec26a0f30da88c6910441a3e68bbff40e5",
-      "floor/scripts/check_manifest.py": "46adcf75ef9b1754c2e894b3a1eac76ffe8b1bec8e6118f01e8321d4c900cde4",
-      "floor/scripts/floor.py": "16f3bdb994e393b4957842339004c2deee1e8e62981506c481ac25842309b068",
-      "floor/scripts/hash_util.py": "b1566c384124374d26507305e23634dc246c1d1265836b464978b3e64e26ee25",
-      "floor/scripts/shutdown.py": "47855f574cf1aaf8b082430ec866334f53c4900e6ffc82cab0242b43c5ada73e",
       "floor/setup.md": "b7a864d990be41a37521e299c2c4a6444d107109883952bfe8bca1974b67d7c4"
     },
-    "source_hash": "e634c994fb57f415b059f6d1771e48311bdff490f207f49df6ad191dc84127a7"
+    "source_hash": "690ad9b4df08be6796a8a9eb79d5b6b030af72ee88ce9f00068b717df2e1b791"
   },
   "project_management/cdocs/scripts-and-checks.md": {
-    "content_hash": "088421404cfce54fab44acf0b6a527043cb16dc7da84a97cd35161fa8d51a607",
+    "content_hash": "6105c62d970bf8ac074e0d7a33ba184c290d347bec338bd36e552b6e64f4c184",
     "source_file_hashes": {
-      "floor/scripts/check_cdoc_coverage.py": "40b8032d39518e7ab6a94431aaec2c57998e77f81f7b54127ab3a59c1c93546e",
+      "floor/scripts/check_cdoc_coverage.py": "6fbcdf45a304aeecf88e87160c3d853c13be6039aed1a668fdb9e911628faf2a",
       "floor/scripts/check_cdocs.py": "8400824eb965b0270eab17b135d72fec26a0f30da88c6910441a3e68bbff40e5",
       "floor/scripts/check_manifest.py": "46adcf75ef9b1754c2e894b3a1eac76ffe8b1bec8e6118f01e8321d4c900cde4",
-      "floor/scripts/floor.py": "16f3bdb994e393b4957842339004c2deee1e8e62981506c481ac25842309b068",
       "floor/scripts/hash_util.py": "b1566c384124374d26507305e23634dc246c1d1265836b464978b3e64e26ee25",
-      "floor/scripts/shutdown.py": "47855f574cf1aaf8b082430ec866334f53c4900e6ffc82cab0242b43c5ada73e",
       "floor/scripts/task_counter.py": "48440a7448de626cda1257902a8f6cc5c9cf66b91060d6c648707dc27918a2ea"
     },
-    "source_hash": "861d70333353f4b275c7bb2da1cb25f2351670d9c5b5b66e87d3c231b3fff394"
+    "source_hash": "c2a4c6b77e9a405377d0819ba36bd4f1ac3ce9be6588295fa55fa8d896573ca6"
+  },
+  "project_management/cdocs/scripts-orchestration.md": {
+    "content_hash": "31ac31f83a6cb8f09f6494e56da245e576eb44fa2d2d4c0fd5ce336f3e60f7ee",
+    "source_file_hashes": {
+      "floor/scripts/floor.py": "97c6a9e7aaa087fce2366de5fdacacf934da9481cc00a132bd6d00263130bd70",
+      "floor/scripts/shutdown.py": "01b1be45adc3339c38169b75bc1bfe57ac8f406cd10dbcb9e02683d72f2c174c"
+    },
+    "source_hash": "76b3b0d92d2560aa0be37c7eafb7dfbb94122b509dceaacf3d52ab472c97b71f"
+  },
+  "project_management/cdocs/template-scaffolding.md": {
+    "content_hash": "45d201e88cc74639bd093c0e4b947df3f7c3a0e4cadece6c6cc4cb7e87c34805",
+    "source_file_hashes": {
+      "floor/project_management/cdoc.md": "41761a77a65dcc565a565366c3418bff267da3cd98111f0ececd0a21acdfded2",
+      "floor/project_management/cdocs/project-overview.md": "f5e415327a900b8d4e2fcae2bc28a821c16efcf4512e6f334210cd1995377af7",
+      "floor/project_management/status.md": "e53478bfa8558c561401cf952071cb01bcce41f443b7dd5ec9a7fbff1b71b3b3"
+    },
+    "source_hash": "e08fb3f0a2003e5dc1f4d6edaf5e1d4f6284e8c731a0818b4314c8d5102f7f91"
   }
 }

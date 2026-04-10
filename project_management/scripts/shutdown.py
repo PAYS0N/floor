@@ -5,7 +5,7 @@ shutdown.py — Post-task cleanup for the Floor workflow.
 Runs all check scripts, increments the task counter, marks a matched status
 item complete, and outputs structured results for Claude Code to act on.
 
-Usage: python scripts/shutdown.py [--repo-root PATH]
+Usage: python project_management/scripts/shutdown.py [--repo-root PATH]
 
 Exit codes:
   0 — success
@@ -19,10 +19,10 @@ import sys
 from pathlib import Path
 
 SESSION_FILE = ".floor_session.json"
-TASK_COUNTER_SCRIPT = "scripts/task_counter.py"
-CHECK_CDOCS_SCRIPT = "scripts/check_cdocs.py"
-CHECK_MANIFEST_SCRIPT = "scripts/check_manifest.py"
-CHECK_CDOC_COVERAGE_SCRIPT = "scripts/check_cdoc_coverage.py"
+TASK_COUNTER_SCRIPT = "project_management/scripts/task_counter.py"
+CHECK_CDOCS_SCRIPT = "project_management/scripts/check_cdocs.py"
+CHECK_MANIFEST_SCRIPT = "project_management/scripts/check_manifest.py"
+CHECK_CDOC_COVERAGE_SCRIPT = "project_management/scripts/check_cdoc_coverage.py"
 
 
 # ── I/O layer ─────────────────────────────────────────────────────────────────

@@ -5,7 +5,7 @@ task_counter.py — Manage the Task Counter value.
 Reads and writes the counter from project_management/task_counter.txt.
 A missing file is treated as a counter value of 0.
 
-Usage: python scripts/task_counter.py <operation> [--repo-root PATH]
+Usage: python project_management/scripts/task_counter.py <operation> [--repo-root PATH]
 
 Operations:
   read       — print the current counter value

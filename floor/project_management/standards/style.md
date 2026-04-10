@@ -77,11 +77,3 @@ These apply to all projects by default. To disable one, move it to the "Disabled
 
 - After any complete code change, run [lint command] and [build command]. Both must pass.
 - When the linter or compiler flags an issue, fix the underlying problem — do not suppress or work around it.
-
----
-
-## Disabled Universal Rules
-
-<!-- If you disabled any universal rule during setup, move it here with a rationale. Example:
-- **DRY** — Disabled because [this firmware project requires inlined ISR handlers for timing guarantees].
--->

@@ -24,44 +24,36 @@ These apply to all projects by default. To disable one, move it to the "Disabled
 
 ## Language & Tooling
 
-- Languages: Markdown (documentation/templates), Bash (scripts), Python (tooling scripts)
-- Build command: None yet
-- Lint/format command: None yet
-- Source directory: `floor/` (template files distributed to new projects)
-- Output directory: N/A
+- Languages: Python 3.x (scripts), Markdown (documentation)
+- Source directory: `floor/`
+- Output: No build output; project is distributed as-is
 
 ## Naming Conventions
 
-- Files: lowercase kebab-case (e.g. `architecture-check.md`); Python files use lowercase underscore-separated (e.g. `check_cdocs.py`, `hash_util.py`) per Python convention
-- Python scripts vs. modules: runnable scripts begin with `#!/usr/bin/env python3` and define `main()` + `if __name__ == "__main__":`; importable utility modules omit the shebang and declare `__all__` near the top to explicitly list their public surface
-- Directories: lowercase with underscores for multi-word (e.g. `project_management/`)
-- Bash variables: UPPER_SNAKE_CASE for exported/environment, lower_snake_case for local
-- Bash functions: lower_snake_case
-- Python module-level constants: UPPER_SNAKE_CASE
-- Python functions and variables: lower_snake_case
+- Python functions and variables: `snake_case`
+- Python classes: `PascalCase`
+- Constants: `UPPER_SNAKE_CASE`
+- Markdown files: `kebab-case`
+- Scripts: descriptive names, e.g., `shutdown.py`, `check_manifest.py`
 
 ## Formatting
 
-- Indentation: 2 spaces for Bash and Python scripts, no indentation convention for Markdown
-- Markdown headings: ATX-style (`##`), single blank line before and after
-- Bash: Opening braces/`then`/`do` on the same line as the statement
-
-## Type Safety
-
-Not applicable — no typed language in use.
+- Indentation: 2 spaces (Python and Markdown)
+- Line length: soft limit 88 characters (Python), 100 characters (Markdown)
+- Two blank lines between top-level Python function/class definitions
+- Markdown headers follow content hierarchy (# → ## → ###, no skips)
+- Code blocks in Markdown must specify language (e.g., ```python)
 
 ## Error Handling
 
-- Bash scripts: Use `set -euo pipefail` at the top of every script
-- Validate inputs at the start of scripts; fail with a clear error message
-
-## Prompts & Agent Context
-
-- **Minimum necessary context** — An agent should only be exposed to the files and information it needs for its task. Do not load the entire project into every prompt.
-- **Self-contained prompts** — A prompt must either contain all the information the agent needs or explicitly direct the agent to gather it (e.g. "read file X before proceeding"). Never assume the agent has prior context.
-- **No implicit knowledge** — If a prompt depends on conventions, definitions, or decisions documented elsewhere, either inline the relevant details or include a read directive. The agent cannot recall what it has not been given.
-- **Scope matches task** — The breadth of context given to an agent should be proportional to the task. A focused bug fix gets a narrow slice; an architecture review gets the full standards.
+- Errors propagate; no silent swallowing
+- Invalid inputs raise descriptive exceptions
+- File I/O errors include the file path in the message
+- Scripts log errors to stderr and exit with non-zero status on failure
 
 ## Build & Lint Gate
 
-- No automated linting or build steps yet. When tooling is added, update this section.
+- Python scripts must be syntactically correct and executable
+- All tests must pass (if applicable to the modified module)
+- Markdown files must follow the formatting rules in this guide
+- All script imports must be resolvable without errors

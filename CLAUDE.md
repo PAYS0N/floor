@@ -1,12 +1,12 @@
 ## Project Summary
 
-Do not skip this step; Read project_management/manifest.md.
+Read project_management/manifest.md.
 
-Floor is a project management template system for AI-assisted software development, providing structured conventions, standards, and prompts that give Claude consistent context across sessions.
+Floor is a template and framework for structured project management using Claude Code, combining architecture conventions, prompt composition, and automated documentation updates.
 
 ## Response rules
 
-- When the user says "implement" or "implement <file>.md": read the specified prompt file (default: `project_management/prompts/implement-this.md`), implement the task described in it (plan-first, work with the user), then after the user confirms completion, run `python scripts/shutdown.py` from the repo root and follow its output to update all flagged documentation.
+- When the user says "implement" or "implement <file>.md": read the specified prompt file (default: `project_management/prompts/implement-this.md`), implement the task described in it (plan-first, work with the user), then after the user confirms completion, run `python project_management/scripts/shutdown.py` from the repo root and follow its output to update all flagged documentation.
 
 ## Meta rules
 
@@ -25,3 +25,5 @@ Floor is a project management template system for AI-assisted software developme
 - Remember: When asked to create project management files, create them in the project_management directory in root.
 
 - Remember: Before creating new source files, adding cross-module imports, or moving responsibilities between modules, read `project_management/standards/architecture.md`.
+
+Prefer python3.
