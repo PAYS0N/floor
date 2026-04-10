@@ -80,4 +80,4 @@ Overwrite each diagram file in `project_management/artifacts/` with the newly ge
 
 If the verdict is PASS WITH NOTES, add a "Ratified Changes" section to `architecture-baseline.md` listing what changed and why.
 
-Run `python scripts/task_counter.py reset` from the repo root to reset the Task Counter to 0.
+Run `python scripts/task_counter.py reset`
