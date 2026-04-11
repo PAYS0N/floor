@@ -1,15 +1,15 @@
 ---
 sources:
-  - floor/scripts/hash_util.py
-  - floor/scripts/check_cdocs.py
-  - floor/scripts/check_manifest.py
-  - floor/scripts/check_cdoc_coverage.py
-  - floor/scripts/task_counter.py
+  - floor/project_management/scripts/hash_util.py
+  - floor/project_management/scripts/check_cdocs.py
+  - floor/project_management/scripts/check_manifest.py
+  - floor/project_management/scripts/check_cdoc_coverage.py
+  - floor/project_management/scripts/task_counter.py
 ---
 
 # Scripts — Checks and Utilities
 
-All scripts live in `floor/scripts/`. Two categories: utility modules (no shebang, declare `__all__`) and runnable scripts (shebang + `main()`). Scripts may import from utility modules in the same directory; scripts must not import from other scripts.
+All scripts live in `floor/project_management/scripts/`. Two categories: utility modules (no shebang, declare `__all__`) and runnable scripts (shebang + `main()`). Scripts may import from utility modules in the same directory; scripts must not import from other scripts.
 
 ## hash_util.py
 

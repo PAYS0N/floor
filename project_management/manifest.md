@@ -14,6 +14,7 @@
 | [project_management/standards/style.md](standards/style.md) | Coding conventions: universal rules, naming, formatting, error handling, and build gate |
 | [project_management/standards/architecture.md](standards/architecture.md) | Architecture conventions: universal rules, module hierarchy, forbidden patterns, state mutation rules |
 | [project_management/prompts/architecture-check.md](prompts/architecture-check.md) | Periodic health check prompt: map current architecture, run forbidden pattern checks, compare to baseline, produce verdict |
+| [project_management/prompts/implement-this.md](prompts/implement-this.md) | Task prompt: written by prompting assistant during floor.py session, describes the work to be implemented |
 
 ---
 
@@ -80,10 +81,10 @@
 | [floor/project_management/prompts/architecture-check.md](../floor/project_management/prompts/architecture-check.md) | Template architecture check prompt (copied into new projects) |
 | [floor/project_management/standards/architecture.md](../floor/project_management/standards/architecture.md) | Template architecture standards (copied into new projects) |
 | [floor/project_management/standards/style.md](../floor/project_management/standards/style.md) | Template style standards (copied into new projects) |
-| [floor/scripts/floor.py](../floor/scripts/floor.py) | Template copy of floor.py (distributed with the template) |
-| [floor/scripts/shutdown.py](../floor/scripts/shutdown.py) | Template copy of shutdown.py (distributed with the template) |
-| [floor/scripts/check_manifest.py](../floor/scripts/check_manifest.py) | Template copy of check_manifest.py (distributed with the template) |
-| [floor/scripts/check_cdocs.py](../floor/scripts/check_cdocs.py) | Template copy of check_cdocs.py (distributed with the template) |
-| [floor/scripts/check_cdoc_coverage.py](../floor/scripts/check_cdoc_coverage.py) | Template copy of check_cdoc_coverage.py (distributed with the template) |
-| [floor/scripts/task_counter.py](../floor/scripts/task_counter.py) | Template copy of task_counter.py (distributed with the template) |
-| [floor/scripts/hash_util.py](../floor/scripts/hash_util.py) | Template copy of hash_util.py (distributed with the template) |
+| [floor/project_management/scripts/floor.py](../floor/project_management/scripts/floor.py) | Template copy of floor.py (distributed with the template) |
+| [floor/project_management/scripts/shutdown.py](../floor/project_management/scripts/shutdown.py) | Template copy of shutdown.py (distributed with the template) |
+| [floor/project_management/scripts/check_manifest.py](../floor/project_management/scripts/check_manifest.py) | Template copy of check_manifest.py (distributed with the template) |
+| [floor/project_management/scripts/check_cdocs.py](../floor/project_management/scripts/check_cdocs.py) | Template copy of check_cdocs.py (distributed with the template) |
+| [floor/project_management/scripts/check_cdoc_coverage.py](../floor/project_management/scripts/check_cdoc_coverage.py) | Template copy of check_cdoc_coverage.py (distributed with the template) |
+| [floor/project_management/scripts/task_counter.py](../floor/project_management/scripts/task_counter.py) | Template copy of task_counter.py (distributed with the template) |
+| [floor/project_management/scripts/hash_util.py](../floor/project_management/scripts/hash_util.py) | Template copy of hash_util.py (distributed with the template) |

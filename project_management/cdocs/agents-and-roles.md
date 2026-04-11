@@ -1,8 +1,8 @@
 ---
 sources:
   - floor/CLAUDE.md
-  - floor/scripts/floor.py
-  - floor/scripts/shutdown.py
+  - floor/project_management/scripts/floor.py
+  - floor/project_management/scripts/shutdown.py
   - floor/project_management/prompting.md
   - floor/project_management/prompts/architecture-check.md
 ---

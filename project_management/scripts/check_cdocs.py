@@ -164,16 +164,17 @@ def run_check(repo_root):
     status = result["status"]
 
     if status == "stale":
-      any_stale = True
-      magnitude_pct = round(result["stale_magnitude"] * 100)
-      print(f"{cdoc_key}: STALE ({magnitude_pct}% of sources changed)")
-      for src in result["changed_sources"]:
-        print(f"  changed: {src}")
-      # Update store only if the cdoc was also manually refreshed.
-      # A stale cdoc with unchanged content keeps its old source_hash so
-      # the stale signal persists on the next run.
+      # If the cdoc content was updated, it's been refreshed despite source changes.
+      # Report as fresh and update the store. Otherwise, it's truly stale.
       if result["content_changed"]:
+        print(f"{cdoc_key}: fresh (sources changed but cdoc refreshed)")
         updated_store[cdoc_key] = build_store_entry(result)
+      else:
+        any_stale = True
+        magnitude_pct = round(result["stale_magnitude"] * 100)
+        print(f"{cdoc_key}: STALE ({magnitude_pct}% of sources changed)")
+        for src in result["changed_sources"]:
+          print(f"  changed: {src}")
     elif status == "new":
       print(f"{cdoc_key}: new (no prior hash recorded)")
       updated_store[cdoc_key] = build_store_entry(result)

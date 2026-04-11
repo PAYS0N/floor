@@ -1,7 +1,7 @@
 ---
 sources:
-  - floor/scripts/floor.py
-  - floor/scripts/shutdown.py
+  - floor/project_management/scripts/floor.py
+  - floor/project_management/scripts/shutdown.py
 ---
 
 # Scripts — Orchestration

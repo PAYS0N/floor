@@ -20,8 +20,8 @@ The template lives in `floor/`. Everything at the repo root manages Floor's own 
 
 The template ships these file groups:
 - **CLAUDE.md** — Session entry point. Defines the "implement" response rule.
-- **project_management/** — Manifest, status, cdoc/prompting templates, standards, prompts, artifacts.
-- **scripts/** — Python tooling. `floor.py` (CLI entry), `shutdown.py` (post-task), check scripts, utilities.
+- **project_management/** — Manifest, status, cdoc/prompting templates, standards, prompts, artifacts, and scripts.
+- **project_management/scripts/** — Python tooling. `floor.py` (CLI entry), `shutdown.py` (post-task), check scripts, utilities.
 
 ## Core Flow
 
