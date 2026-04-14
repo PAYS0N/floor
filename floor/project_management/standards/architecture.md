@@ -99,4 +99,4 @@ When creating a new file or component:
 2. Ensure it references only its layer or below.
 3. Give it a single clear responsibility that doesn't overlap with existing modules.
 4. Update the module hierarchy table in this document.
-5. Update `project_management/architecture-baseline.md` with the new dependency.
+5. Update `project_management/artifacts/architecture-baseline.md` with the new dependency.

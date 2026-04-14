@@ -29,6 +29,7 @@ Produce one Mermaid diagram per file in `project_management/artifacts/` (if it e
 Graph types for this project (one file each):
 - [your graph type 1] — e.g. `01-module-dependency.mermaid`
 - [your graph type 2] — e.g. `02-layer-hierarchy.mermaid`
+- [your graph type 3] — e.g. `03-state-mutations.mermaid`
 
 Update the Module Summary table for `project_management/artifacts/architecture-baseline.md`.
 

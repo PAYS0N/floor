@@ -116,7 +116,7 @@ def detect_status_cli(status_text):
   project_match = PROJECT_NAME_RE.search(status_text)
   if not project_match:
     return None, None
-  return cli_path, project_match.group(1)
+  return cli_path, project_match.group(2)
 
 
 def resolve_status(repo_root):

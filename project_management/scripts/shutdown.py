@@ -107,10 +107,10 @@ def run_shutdown(repo_root):
 
   print("## Actions Required\n")
   print("Based on the results above:")
-  print("- Add any UNCOVERED files to the appropriate cdoc's sources list")
   print("- Add any MISSING files to manifest.md; remove any DEAD entries")
-  print("- Read cdoc.md, then update affected context documents")
+  print("- Add any UNCOVERED files to the appropriate cdoc's sources list. If an appropriate one doesn't exist, create a new one.")
   print("- Make sure to update any STALE cdocs to reflect current source file state")
+  print("- You must read cdoc.md before updating affected context documents")
   print("- Remind the user to make a git commit")
 
   # 7. Cleanup

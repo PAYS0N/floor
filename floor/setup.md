@@ -13,6 +13,10 @@ Complete all items below before using this template. When a setup task is comple
 - [ ] **Project name** — Replace `[Project Name]` in the heading and the Name field.
 - [ ] **Description** — Replace the two placeholder sentences with at least two real sentences. For example: what the project does, and who it's for or what problem it solves.
 
+### project_management/cdocs/*
+
+- [ ] **Additional cdocs** — If the project is already developed, create additional cdocs to fully represent the state of the project.
+
 ### project_management/prompting.md
 
 - [ ] **cdoc routing table** — Replace `[Replace with your top-level domain — e.g. core system / data model]` with the actual domain name from your project overview cdoc. Add more rows as you create additional cdocs.
