@@ -9,15 +9,29 @@ import hashlib
 from pathlib import Path
 
 __all__ = [
+  "DEFAULT_COVERAGE_EXCLUDES",
   "FRONTMATTER_DELIM",
   "compute_source_hash",
   "file_sha256",
   "find_changed_sources",
   "parse_frontmatter",
+  "read_gitignore_patterns",
   "text_sha256",
 ]
 
 FRONTMATTER_DELIM = "---"
+
+DEFAULT_COVERAGE_EXCLUDES = [
+  ".git",
+  "__pycache__",
+  "project_management/artifacts",
+  "project_management/cact_tree.json",
+  "project_management/cdoc_hashes.json",
+  "project_management/task_counter.txt",
+  ".floor_session.json",
+  ".gitignore",
+  "setup.md",
+]
 
 
 def parse_frontmatter(text):
@@ -99,3 +113,21 @@ def find_changed_sources(current_per_file, stored_per_file):
   """Return sorted list of source paths that were added, removed, or changed."""
   all_paths = set(current_per_file) | set(stored_per_file)
   return sorted(p for p in all_paths if current_per_file.get(p) != stored_per_file.get(p))
+
+
+def read_gitignore_patterns(repo_root):
+  """Read .gitignore and return a list of path prefixes to exclude.
+
+  Strips leading/trailing slashes from each non-comment, non-empty line.
+  Returns an empty list if .gitignore does not exist.
+  """
+  gitignore = repo_root / ".gitignore"
+  if not gitignore.exists():
+    return []
+  patterns = []
+  for line in gitignore.read_text(encoding="utf-8").splitlines():
+    line = line.strip()
+    if not line or line.startswith("#"):
+      continue
+    patterns.append(line.strip("/"))
+  return patterns

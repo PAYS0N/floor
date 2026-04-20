@@ -30,4 +30,4 @@ If management decisions must be made before the prompt can be composed, ask the 
 
 ## Model recommendation
 
-After composing the prompt, indicate the Claude model best suited for the task. This is guidance for the user, not part of the prompt itself.
+After composing the prompt, indicate the Claude model best suited for the task. This is guidance for the user, not part of the prompt itself. Do not include in .md file; output to user.

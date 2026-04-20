@@ -20,7 +20,7 @@ Read project_management/manifest.md.
 
 ## Context Rules
 
-- Remember: When asked to create or edit a context document, read project_management/cdoc.md.
+- Remember: When starting a task, if the task prompt specifies CACT node keys, run `python project_management/scripts/cact_walk.py <keys>` and read the output before proceeding.
 
 - Remember: When asked to record an issue or summarize project status, read project_management/status.md.
 

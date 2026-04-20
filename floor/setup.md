@@ -8,19 +8,6 @@ Complete all items below before using this template. When a setup task is comple
 
 - [ ] **Project summary block** — Replace `[PROJECT NAME] is a [brief description].` with one sentence describing your project.
 
-### project_management/cdocs/project-overview.md
-
-- [ ] **Project name** — Replace `[Project Name]` in the heading and the Name field.
-- [ ] **Description** — Replace the two placeholder sentences with at least two real sentences. For example: what the project does, and who it's for or what problem it solves.
-
-### project_management/cdocs/*
-
-- [ ] **Additional cdocs** — If the project is already developed, create additional cdocs to fully represent the state of the project.
-
-### project_management/prompting.md
-
-- [ ] **cdoc routing table** — Replace `[Replace with your top-level domain — e.g. core system / data model]` with the actual domain name from your project overview cdoc. Add more rows as you create additional cdocs.
-
 ### project_management/standards/style.md
 
 - [ ] **Project name** — Replace `[PROJECT NAME]` in the heading.
@@ -83,6 +70,11 @@ Choose at least two. You can always add more during a health check if the projec
 - [ ] **Graph types** (Step 3) — Replace `[your graph types]` with the list you chose in the architecture.md setup above.
 - [ ] **F1–F4 check commands** (Step 4) — Replace with the actual commands from your architecture.md Forbidden Patterns section. For non-code projects, replace with manual review descriptions.
 - [ ] **`[your lint command]` and `[your build command]`** (Step 5) — Replace with your actual commands, or remove this step if your project has no build or lint step.
+
+### project_management/scripts/cact_build.py
+
+- [ ] **Tree structure definition** — Update the `TREE_DEFINITION` constant with your project's actual files and directory groupings. The default tree describes a generic Floor-managed project. Replace it with node entries for your source files, standards, and other project content.
+- [ ] **Cross-references** — Update the `CROSS_REFERENCES` constant with lateral dependencies specific to your project.
 
 ### project_management/manifest.md
 

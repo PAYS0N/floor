@@ -27,7 +27,8 @@ STATUS_PATH = "project_management/status.md"
 SESSION_FILE = ".floor_session.json"
 PROMPT_OUTPUT_PATH = "project_management/prompts/implement-this.md"
 TASK_COUNTER_SCRIPT = "project_management/scripts/task_counter.py"
-CHECK_CDOCS_SCRIPT = "project_management/scripts/check_cdocs.py"
+CACT_UPDATE_SCRIPT = "project_management/scripts/cact_update.py"
+CACT_WALK_SCRIPT = "project_management/scripts/cact_walk.py"
 ARCH_CHECK_THRESHOLD = 10
 
 
@@ -73,7 +74,8 @@ def write_session_file(repo_root, task_description):
 # ── Prompt assembly ──────────────────────────────────────────────────────────
 
 
-def assemble_prompt(task_description, prompting_text, cdocs_output, status_text):
+def assemble_prompt(task_description, prompting_text, cact_staleness,
+                    cact_summary_tree, status_text):
   """Build the base prompt string sent to the Claude CLI session."""
   sections = []
 
@@ -87,8 +89,15 @@ def assemble_prompt(task_description, prompting_text, cdocs_output, status_text)
   if prompting_text:
     sections.append(f"## Base prompting instructions\n\n{prompting_text}")
 
-  if cdocs_output:
-    sections.append(f"## Cdoc staleness report\n\n```\n{cdocs_output}\n```")
+  if cact_staleness:
+    sections.append(
+      f"## CACT staleness report\n\n```\n{cact_staleness}\n```"
+    )
+
+  if cact_summary_tree:
+    sections.append(
+      f"## CACT summary tree\n\n{cact_summary_tree}"
+    )
 
   if status_text:
     sections.append(f"## Current project status\n\n{status_text}")
@@ -168,7 +177,10 @@ def run_floor(repo_root, task_description):
     )
     return 0
 
-  cdocs_output = run_script(repo_root, CHECK_CDOCS_SCRIPT)
+  cact_staleness = run_script(
+    repo_root, CACT_UPDATE_SCRIPT, ["--check-only"]
+  )
+  cact_summary_tree = run_script(repo_root, CACT_WALK_SCRIPT, ["--all"])
 
   prompting_text = read_file(repo_root / PROMPTING_PATH)
   if prompting_text is None:
@@ -177,7 +189,10 @@ def run_floor(repo_root, task_description):
 
   status_text = resolve_status(repo_root)
 
-  prompt = assemble_prompt(task_description, prompting_text, cdocs_output, status_text)
+  prompt = assemble_prompt(
+    task_description, prompting_text, cact_staleness,
+    cact_summary_tree, status_text,
+  )
 
   write_session_file(repo_root, task_description)
 

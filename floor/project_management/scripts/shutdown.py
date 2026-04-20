@@ -20,9 +20,9 @@ from pathlib import Path
 
 SESSION_FILE = ".floor_session.json"
 TASK_COUNTER_SCRIPT = "project_management/scripts/task_counter.py"
-CHECK_CDOCS_SCRIPT = "project_management/scripts/check_cdocs.py"
 CHECK_MANIFEST_SCRIPT = "project_management/scripts/check_manifest.py"
-CHECK_CDOC_COVERAGE_SCRIPT = "project_management/scripts/check_cdoc_coverage.py"
+CHECK_CACT_COVERAGE_SCRIPT = "project_management/scripts/check_cact_coverage.py"
+CACT_UPDATE_SCRIPT = "project_management/scripts/cact_update.py"
 
 
 # ── I/O layer ─────────────────────────────────────────────────────────────────
@@ -72,28 +72,28 @@ def run_shutdown(repo_root):
   session = load_session(repo_root)
   results = []
 
-  # 1. Check cdoc coverage
-  stdout, stderr, rc = run_script(repo_root, CHECK_CDOC_COVERAGE_SCRIPT)
-  results.append(("Cdoc Coverage", stdout, stderr, rc))
-
-  # 2. Check manifest
+  # 1. Check manifest
   stdout, stderr, rc = run_script(repo_root, CHECK_MANIFEST_SCRIPT)
   results.append(("Manifest Audit", stdout, stderr, rc))
 
-  # 3. Check cdocs staleness
-  stdout, stderr, rc = run_script(repo_root, CHECK_CDOCS_SCRIPT)
-  results.append(("Cdoc Staleness", stdout, stderr, rc))
+  # 2. Check CACT coverage
+  stdout, stderr, rc = run_script(repo_root, CHECK_CACT_COVERAGE_SCRIPT)
+  results.append(("CACT Coverage", stdout, stderr, rc))
 
-  # 4. Increment task counter
+  # 3. CACT update
+  stdout, stderr, rc = run_script(repo_root, CACT_UPDATE_SCRIPT)
+  results.append(("CACT Update", stdout, stderr, rc))
+
+  # 5. Increment task counter
   stdout, stderr, rc = run_script(repo_root, TASK_COUNTER_SCRIPT, ["increment"])
   results.append(("Task Counter", stdout, stderr, rc))
 
-  # 5. Mark status item complete if session has a matched ID
+  # 6. Mark status item complete if session has a matched ID
   status_id = session.get("status_item_id")
   if status_id:
     results.append(("Status Item", f"Mark task {status_id} as complete", "", 0))
 
-  # 6. Output structured markdown
+  # 7. Output structured markdown
   print("# Shutdown Results\n")
 
   for name, stdout, stderr, rc in results:
@@ -108,12 +108,12 @@ def run_shutdown(repo_root):
   print("## Actions Required\n")
   print("Based on the results above:")
   print("- Add any MISSING files to manifest.md; remove any DEAD entries")
-  print("- Add any UNCOVERED files to the appropriate cdoc's sources list. If an appropriate one doesn't exist, create a new one.")
-  print("- Make sure to update any STALE cdocs to reflect current source file state")
-  print("- You must read cdoc.md before updating affected context documents")
+  print("- Add any UNCOVERED files to the tree definition in `cact_build.py`")
+  print("- Review any regenerated CACT summaries in `cact_tree.json` for accuracy")
+  print("- Add any CACT-uncovered files to the tree definition in `cact_build.py`")
   print("- Remind the user to make a git commit")
 
-  # 7. Cleanup
+  # 8. Cleanup
   cleanup_session(repo_root)
 
   return 0

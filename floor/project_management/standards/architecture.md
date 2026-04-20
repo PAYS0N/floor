@@ -34,7 +34,7 @@ Files and components are organized in layers. A module may only reference its ow
 |-------|---------|----------------|
 | 0 — [Entry] | `[entryPoint]` | [Starting point; no logic of its own] |
 | 1 — [Orchestration] | `[orchestrator]` | [Wires together or indexes higher-level components; no domain logic] |
-| 2 — [Primary] | `[primaryModule]`, `[primaryModule2]` | [Core concern and primary interfaces] |
+| 2 — [Primary] | `[primaryModule]`, `[primaryModule2]`, `cact_build.py`, `cact_walk.py`, `cact_update.py`, `check_cact_coverage.py` | [Core concern and primary interfaces], CACT tree building, context walking, incremental updating, and coverage checking |
 | 3 — [Secondary] | `[secondaryModule]`, `[secondaryModule2]` | [Supporting components or sub-concerns] |
 | 4 — [Utility] | `[utilityModule]` | [Shared helpers with no domain knowledge] |
 
@@ -49,6 +49,10 @@ Each module owns a single concern. Do not spread a concern across modules or mer
 - **[primaryModule]** — Owns [describe the concern]. Only place where [key invariant].
 - **[secondaryModule]** — [Describe the concern]. No access to [restricted resource].
 - **[utilityModule]** — Generic helpers. No domain-specific logic.
+- **cact_build.py** — Builds or fully rebuilds the CACT tree from scratch. Reads all source files, computes hashes, generates directory summaries via Claude CLI. Does not import from check scripts.
+- **cact_walk.py** — Reads the CACT tree and outputs accumulated context from root to specified target nodes. No API/CLI calls. Pure I/O.
+- **cact_update.py** — Detects changed files post-task, regenerates stale directory summaries via Claude CLI, checks file coverage.
+- **check_cact_coverage.py** — Reports repo files not represented as a leaf node in the CACT tree. Read-only.
 
 ## Forbidden Patterns
 
@@ -91,6 +95,7 @@ Check: Review the dependency graph manually or via the architecture health check
 - **[State A]**: changed only in `[module]` (via [mechanism]).
 - **[State B]**: changed only via `[mechanism]`, initiated from `[module]`.
 - **[State C]**: toggled via `[mechanism]`, initiated from `[module]` via [trigger/event].
+- **project_management/cact_tree.json**: written by `cact_build.py` (full rebuild) and `cact_update.py` (incremental update). Read by `cact_walk.py` and `floor.py` (via subprocess to `cact_walk.py`).
 
 ## Adding New Modules
 
