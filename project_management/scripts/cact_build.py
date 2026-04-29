@@ -54,21 +54,82 @@ TREE_DEFINITION = [
     "key": "root",
     "node_type": "directory",
     "children": [
-      # ── Your project files go here ─────────────────────────────────────────
-      # Replace this empty "project" node with your actual source structure.
-      # Example:
-      #   {
-      #     "key": "project/src",
-      #     "node_type": "directory",
-      #     "children": [
-      #       {"key": "project/src/main.py", "node_type": "source",
-      #        "file_path": "src/main.py"},
-      #     ],
-      #   },
+      # ── Floor product templates (the deliverable in floor/) ───────────────
+      # These are the pristine template files shipped to end users. They are
+      # content, not executed code — tracked here so CACT can surface drift
+      # against the live project_management/ working copy.
       {
         "key": "project",
         "node_type": "directory",
-        "children": [],
+        "children": [
+          {"key": "project/CLAUDE.md", "node_type": "source",
+           "file_path": "floor/CLAUDE.md"},
+          {"key": "project/setup.md", "node_type": "source",
+           "file_path": "floor/setup.md"},
+          {
+            "key": "project/project_management",
+            "node_type": "directory",
+            "children": [
+              {"key": "project/project_management/manifest.md", "node_type": "source",
+               "file_path": "floor/project_management/manifest.md"},
+              {"key": "project/project_management/prompting.md", "node_type": "source",
+               "file_path": "floor/project_management/prompting.md"},
+              {"key": "project/project_management/status.md", "node_type": "source",
+               "file_path": "floor/project_management/status.md"},
+              {
+                "key": "project/project_management/prompts",
+                "node_type": "directory",
+                "children": [
+                  {"key": "project/project_management/prompts/architecture-check.md",
+                   "node_type": "source",
+                   "file_path": "floor/project_management/prompts/architecture-check.md"},
+                  {"key": "project/project_management/prompts/cact-leaf-summary.md",
+                   "node_type": "source",
+                   "file_path": "floor/project_management/prompts/cact-leaf-summary.md"},
+                  {"key": "project/project_management/prompts/cact-dir-summary.md",
+                   "node_type": "source",
+                   "file_path": "floor/project_management/prompts/cact-dir-summary.md"},
+                ],
+              },
+              {
+                "key": "project/project_management/standards",
+                "node_type": "directory",
+                "children": [
+                  {"key": "project/project_management/standards/architecture.md",
+                   "node_type": "source",
+                   "file_path": "floor/project_management/standards/architecture.md"},
+                  {"key": "project/project_management/standards/style.md",
+                   "node_type": "source",
+                   "file_path": "floor/project_management/standards/style.md"},
+                ],
+              },
+              {
+                "key": "project/project_management/scripts",
+                "node_type": "directory",
+                "children": [
+                  {"key": "project/project_management/scripts/floor.py", "node_type": "source",
+                   "file_path": "floor/project_management/scripts/floor.py"},
+                  {"key": "project/project_management/scripts/shutdown.py", "node_type": "source",
+                   "file_path": "floor/project_management/scripts/shutdown.py"},
+                  {"key": "project/project_management/scripts/cact_build.py", "node_type": "source",
+                   "file_path": "floor/project_management/scripts/cact_build.py"},
+                  {"key": "project/project_management/scripts/cact_update.py", "node_type": "source",
+                   "file_path": "floor/project_management/scripts/cact_update.py"},
+                  {"key": "project/project_management/scripts/cact_walk.py", "node_type": "source",
+                   "file_path": "floor/project_management/scripts/cact_walk.py"},
+                  {"key": "project/project_management/scripts/check_manifest.py", "node_type": "source",
+                   "file_path": "floor/project_management/scripts/check_manifest.py"},
+                  {"key": "project/project_management/scripts/check_cact_coverage.py", "node_type": "source",
+                   "file_path": "floor/project_management/scripts/check_cact_coverage.py"},
+                  {"key": "project/project_management/scripts/task_counter.py", "node_type": "source",
+                   "file_path": "floor/project_management/scripts/task_counter.py"},
+                  {"key": "project/project_management/scripts/hash_util.py", "node_type": "source",
+                   "file_path": "floor/project_management/scripts/hash_util.py"},
+                ],
+              },
+            ],
+          },
+        ],
       },
       # ── Floor project management scaffolding ───────────────────────────────
       {

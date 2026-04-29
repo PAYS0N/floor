@@ -1,4 +1,4 @@
-<!-- Template file. Customize: replace placeholder layer names, module names, and check commands with your project's actual structure. To disable a universal rule, move it to the "Disabled Universal Rules" section at the bottom with a rationale. -->
+<!-- Template file. Customize: replace placeholder layer names, module names, and check commands with your project's actual structure.-->
 
 # Architecture Conventions: [PROJECT NAME]
 

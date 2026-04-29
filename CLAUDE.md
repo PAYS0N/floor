@@ -2,7 +2,7 @@
 
 Read project_management/manifest.md.
 
-Floor is a template and framework for structured project management using Claude Code, combining architecture conventions, prompt composition, and automated documentation updates.
+Floor is a template and framework for structured project management using Claude Code, combining architecture conventions, prompt composition, and automated documentation updates. The `floor/` directory contains the pristine template that is the product; `project_management/` in root is the working management system being used to develop Floor itself.
 
 ## Response rules
 
@@ -18,12 +18,10 @@ Floor is a template and framework for structured project management using Claude
 
 ## Context Rules
 
-- Remember: When asked to create or edit a context document, read project_management/cdoc.md.
+- Remember: When starting a task, if the task prompt specifies CACT node keys, run `python project_management/scripts/cact_walk.py <keys>` and read the output before proceeding.
 
 - Remember: When asked to record an issue or summarize project status, read project_management/status.md.
 
 - Remember: When asked to create project management files, create them in the project_management directory in root.
 
 - Remember: Before creating new source files, adding cross-module imports, or moving responsibilities between modules, read `project_management/standards/architecture.md`.
-
-Prefer python3.

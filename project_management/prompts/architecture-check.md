@@ -1,6 +1,6 @@
 # Architecture Health Check Prompt
 
-Read `project_management/manifest.md` and all cdocs before proceeding.
+Read `project_management/manifest.md` and the CACT summary tree before proceeding.
 
 ## Task
 
@@ -14,44 +14,50 @@ If no baseline exists yet, note that this run will produce the initial baseline 
 
 ### Step 2 — Map Current Architecture
 
-Read every `.py` file in `project_management/scripts/`. For each file, record:
-- All explicit imports from other project scripts (e.g., `from hash_util import`)
-- Whether it invokes other scripts via subprocess
-- Whether it writes to shared state files (task_counter.txt, cdoc_hashes.json, .floor_session.json)
+Read every file in `project_management/scripts/` and every file in `floor/` (the product templates). For each file, record:
+- All explicit references to other files (Python `import` statements, `subprocess` invocations of another script, and Markdown links between template files)
+- Whether it accesses a shared resource (calls to the `claude` CLI, writes to `project_management/cact_tree.json`, writes to `project_management/task_counter.txt`, writes to `.floor_session.json`)
+- Whether it changes shared state (any of: `cact_tree.json`, `task_counter.txt`, `.floor_session.json`, `project_management/prompts/implement-this.md`, or files under `floor/`)
 - Its approximate line count
 
 ### Step 3 — Generate Current Diagram
 
-Produce one Mermaid diagram per file in `project_management/artifacts/` (if it exists), using the graph types listed below. If the current state reveals structure not captured by these types, add additional diagram files as needed — do not omit structure that the listed types cannot express.
+Produce one Mermaid diagram per graph type in `project_management/artifacts/` (create the directory if it does not exist). If the current state reveals structure not captured by these types, add additional diagram files as needed — do not omit structure that the listed types cannot express.
 
 Graph types for this project (one file each):
-- **Module Dependency Graph** — `01-module-dependency.mermaid` — shows which scripts import or invoke which others
-- **Layered Architecture** — `02-layer-hierarchy.mermaid` — shows scripts organized by layer with permitted reference directions
-- **State Mutation Flow** — `03-state-mutation.mermaid` — shows which modules write to shared state files
-- **User Flow** — `04-user-task-flow.mermaid` — shows how users invoke the full task flow and which checks get triggered
+- Module Dependency Graph — `01-module-dependency.mermaid` (Python imports + subprocess invocations between scripts)
+- Layered Architecture — `02-layer-hierarchy.mermaid` (Entry → Orchestration → Tools → Utility, plus the Content layer for `floor/`)
+- State Mutation Flow — `03-state-mutation.mermaid` (which modules write to `cact_tree.json`, `task_counter.txt`, `.floor_session.json`, and `implement-this.md`)
 
 Update the Module Summary table for `project_management/artifacts/architecture-baseline.md`.
 
 ### Step 4 — Run Forbidden Pattern Checks
 
-Execute each check below. Report pass/fail for each. For manual review steps, describe what was checked and what was found.
+Execute each check below. Report pass/fail for each.
 
-- **F1**: `rg "import subprocess" project_management/scripts/ | grep -v -E "(floor|shutdown)\.py"` — should return nothing
-- **F2**: `rg "^from (floor|shutdown|check_)" project_management/scripts/task_counter.py project_management/scripts/hash_util.py` — should return nothing
-- **F3**: `rg "^(from|import) " project_management/scripts/hash_util.py | grep -v -E "^(import hashlib|from pathlib)"` — should return nothing
-- **F4**: Review dependency graph for cycles
+- **F1** (subprocess calls confined to Entry and Orchestration): `rg -l "subprocess\.|os\.execvp" project_management/scripts/` — must return only `floor.py`, `shutdown.py`, `cact_build.py`, `cact_update.py`.
+- **F2** (writes to `cact_tree.json` confined to Orchestration): `rg -n "cact_tree\.json" project_management/scripts/` — inspect results; write operations must appear only in `cact_build.py` and `cact_update.py`.
+- **F3** (writes to `task_counter.txt` confined to owner): `rg -n "task_counter\.txt" project_management/scripts/` — write operations must appear only in `task_counter.py`; read-only path references elsewhere are acceptable.
+- **F4** (Claude CLI calls confined to designated callers): `rg -n '"claude"' project_management/scripts/` — hits must appear only in `cact_build.py`, `cact_update.py`, and `floor.py`.
+- **F5**: Review the dependency graph in `01-module-dependency.mermaid` for cycles.
 
 ### Step 5 — Run Build & Lint
 
-Run `python3 -m py_compile project_management/scripts/*.py` to verify syntax. Report any errors or warnings.
+Floor has no compiler or linter. Instead, smoke-test the scripts:
+- `python3 project_management/scripts/cact_build.py --no-api` — must exit 0
+- `python3 project_management/scripts/check_manifest.py` — must exit 0
+- `python3 project_management/scripts/check_cact_coverage.py` — must exit 0
+- `python3 project_management/scripts/task_counter.py read` — must exit 0
+
+Report any non-zero exits.
 
 ### Step 6 — Compare to Baseline
 
 If a baseline exists, diff the current diagram against it. Flag:
-- New dependencies (imports that didn't exist in the baseline)
+- New dependencies (imports or subprocess calls that didn't exist in the baseline)
 - Removed dependencies
 - New modules or removed modules
-- Any dependency that violates the layer hierarchy (upward import)
+- Any dependency that violates the layer hierarchy (upward import or upward subprocess call)
 - Any module whose responsibility has shifted (e.g., a read-only module now mutating state)
 
 If no baseline exists, note that this is the initial run and skip this step.
@@ -79,4 +85,4 @@ Overwrite each diagram file in `project_management/artifacts/` with the newly ge
 
 If the verdict is PASS WITH NOTES, add a "Ratified Changes" section to `architecture-baseline.md` listing what changed and why.
 
-Run `python project_management/scripts/task_counter.py reset`
+Run `python3 project_management/scripts/task_counter.py reset`

@@ -1,0 +1,361 @@
+{
+  "version": 1,
+  "root": "root",
+  "nodes": {
+    "root": {
+      "node_type": "directory",
+      "children": [
+        "project",
+        "project_management"
+      ],
+      "content_hash": "308bde3df8cdeacd8108835edd25bd99a91bf9c57b15c6519bf8ab8070c388a5",
+      "summary": "(summary pending \u2014 run without --no-api to generate)",
+      "stale": true
+    },
+    "project": {
+      "node_type": "directory",
+      "children": [
+        "project/CLAUDE.md",
+        "project/setup.md",
+        "project/project_management"
+      ],
+      "content_hash": "69730c1af30e9b26ded28a9ff36d37e56eebc0ff37ab609133269d20f2fffc94",
+      "summary": "(summary pending \u2014 run without --no-api to generate)",
+      "stale": true
+    },
+    "project/CLAUDE.md": {
+      "node_type": "source",
+      "file_path": "floor/CLAUDE.md",
+      "content_hash": "99e619bd3d546f629efb57d8e2f739fa2663971fcef159aa463b9ff9b233dbd8"
+    },
+    "project/setup.md": {
+      "node_type": "source",
+      "file_path": "floor/setup.md",
+      "content_hash": "46bb98df7f16e74b0a570e84180167d3a7010326d48b0726e3fc393e391c5817"
+    },
+    "project/project_management": {
+      "node_type": "directory",
+      "children": [
+        "project/project_management/manifest.md",
+        "project/project_management/prompting.md",
+        "project/project_management/status.md",
+        "project/project_management/prompts",
+        "project/project_management/standards",
+        "project/project_management/scripts"
+      ],
+      "content_hash": "2e0feb86ea76ce8c27b0ae207b23e69de94358e4491fb0748da30334cbe64b80",
+      "summary": "(summary pending \u2014 run without --no-api to generate)",
+      "stale": true
+    },
+    "project/project_management/manifest.md": {
+      "node_type": "source",
+      "file_path": "floor/project_management/manifest.md",
+      "content_hash": "c2a416c964e7fecc8f10db7c50505f5b075ca74d2025224ef19109cf2341405f"
+    },
+    "project/project_management/prompting.md": {
+      "node_type": "source",
+      "file_path": "floor/project_management/prompting.md",
+      "content_hash": "27b4c757b26ee9eab1ad453f8800551c645ee2f3c12761c0b9e3234906e0eecb"
+    },
+    "project/project_management/status.md": {
+      "node_type": "source",
+      "file_path": "floor/project_management/status.md",
+      "content_hash": "e53478bfa8558c561401cf952071cb01bcce41f443b7dd5ec9a7fbff1b71b3b3"
+    },
+    "project/project_management/prompts": {
+      "node_type": "directory",
+      "children": [
+        "project/project_management/prompts/architecture-check.md",
+        "project/project_management/prompts/cact-leaf-summary.md",
+        "project/project_management/prompts/cact-dir-summary.md"
+      ],
+      "content_hash": "39282ea32e8d91464e4b8bffef43d6efa3a790835afa18dd0144dee626de2bd0",
+      "summary": "(summary pending \u2014 run without --no-api to generate)",
+      "stale": true
+    },
+    "project/project_management/prompts/architecture-check.md": {
+      "node_type": "source",
+      "file_path": "floor/project_management/prompts/architecture-check.md",
+      "content_hash": "aa078c9878e7cecbce658769c82aa2603238e25b3c48127fd4a30fd7c4812afa"
+    },
+    "project/project_management/prompts/cact-leaf-summary.md": {
+      "node_type": "source",
+      "file_path": "floor/project_management/prompts/cact-leaf-summary.md",
+      "content_hash": "90a229a78200968a91ca01f70d58694ee17fcff23811d726c3b42a6e728ff0c7"
+    },
+    "project/project_management/prompts/cact-dir-summary.md": {
+      "node_type": "source",
+      "file_path": "floor/project_management/prompts/cact-dir-summary.md",
+      "content_hash": "96a51895e65e1640575ddae829edef0bbefa83bb012277b21605627aa400c2a4"
+    },
+    "project/project_management/standards": {
+      "node_type": "directory",
+      "children": [
+        "project/project_management/standards/architecture.md",
+        "project/project_management/standards/style.md"
+      ],
+      "content_hash": "353ae7003652a6ab33c64253814285b17533c694c4e1d42e5171dddf59943c17",
+      "summary": "(summary pending \u2014 run without --no-api to generate)",
+      "stale": true
+    },
+    "project/project_management/standards/architecture.md": {
+      "node_type": "source",
+      "file_path": "floor/project_management/standards/architecture.md",
+      "content_hash": "080e22e0d96d6b7bc082a363f18bde4def8062ff845a4e3c22dfcb59b966d32e"
+    },
+    "project/project_management/standards/style.md": {
+      "node_type": "source",
+      "file_path": "floor/project_management/standards/style.md",
+      "content_hash": "a36dd46b536937c5ca327f93af5bef2b96cb4cf7ddbbe9523169f33e72dacc0d"
+    },
+    "project/project_management/scripts": {
+      "node_type": "directory",
+      "children": [
+        "project/project_management/scripts/floor.py",
+        "project/project_management/scripts/shutdown.py",
+        "project/project_management/scripts/cact_build.py",
+        "project/project_management/scripts/cact_update.py",
+        "project/project_management/scripts/cact_walk.py",
+        "project/project_management/scripts/check_manifest.py",
+        "project/project_management/scripts/check_cact_coverage.py",
+        "project/project_management/scripts/task_counter.py",
+        "project/project_management/scripts/hash_util.py"
+      ],
+      "content_hash": "4e35309f8e9d0bc8139fc255f254d9df3e54c21e46ee0b7eaa3604435403261a",
+      "summary": "(summary pending \u2014 run without --no-api to generate)",
+      "stale": true
+    },
+    "project/project_management/scripts/floor.py": {
+      "node_type": "source",
+      "file_path": "floor/project_management/scripts/floor.py",
+      "content_hash": "94b3d444b30034b2e2e8d759335bcf63923fe8d9ab0d838f0736ca0a86fe2554"
+    },
+    "project/project_management/scripts/shutdown.py": {
+      "node_type": "source",
+      "file_path": "floor/project_management/scripts/shutdown.py",
+      "content_hash": "28bf66ffea30e6ebeb602b3bc402013ee357054cb54f10db7acbadaf3d973461"
+    },
+    "project/project_management/scripts/cact_build.py": {
+      "node_type": "source",
+      "file_path": "floor/project_management/scripts/cact_build.py",
+      "content_hash": "412a3bb5387e7175ea61a8b60235a9a93d155000eb4800473c269abbb732a2e1"
+    },
+    "project/project_management/scripts/cact_update.py": {
+      "node_type": "source",
+      "file_path": "floor/project_management/scripts/cact_update.py",
+      "content_hash": "03698f567e0d70591bad856ebac1ab1c47aacb09bdaeb951895b829785080645"
+    },
+    "project/project_management/scripts/cact_walk.py": {
+      "node_type": "source",
+      "file_path": "floor/project_management/scripts/cact_walk.py",
+      "content_hash": "7676f7fea015baa6af9fa75b9803e154022fcb6243b353be0d849e2b1c1223fa"
+    },
+    "project/project_management/scripts/check_manifest.py": {
+      "node_type": "source",
+      "file_path": "floor/project_management/scripts/check_manifest.py",
+      "content_hash": "46adcf75ef9b1754c2e894b3a1eac76ffe8b1bec8e6118f01e8321d4c900cde4"
+    },
+    "project/project_management/scripts/check_cact_coverage.py": {
+      "node_type": "source",
+      "file_path": "floor/project_management/scripts/check_cact_coverage.py",
+      "content_hash": "e26209c0b3da8b377397b7c95a9248cd15e3fbef044b6cf89c79a6498d435595"
+    },
+    "project/project_management/scripts/task_counter.py": {
+      "node_type": "source",
+      "file_path": "floor/project_management/scripts/task_counter.py",
+      "content_hash": "1b2eeb2da40fb01dc41304045202e6e8e124480c0726262da3a07d7880d8cb80"
+    },
+    "project/project_management/scripts/hash_util.py": {
+      "node_type": "source",
+      "file_path": "floor/project_management/scripts/hash_util.py",
+      "content_hash": "402fcf42a66a14395cbc34e1b471bf6ee4b226d2d25e8ae75872b4ee9e845350"
+    },
+    "project_management": {
+      "node_type": "directory",
+      "children": [
+        "project_management/scripts",
+        "project_management/standards",
+        "project_management/governance",
+        "project_management/prompts",
+        "project_management/status"
+      ],
+      "content_hash": "42ab5af65d1131e2cae42b01d049b7edf60ac22743bfcae5612b75b792b9e00b",
+      "summary": "(summary pending \u2014 run without --no-api to generate)",
+      "stale": true
+    },
+    "project_management/scripts": {
+      "node_type": "directory",
+      "children": [
+        "project_management/scripts/floor.py",
+        "project_management/scripts/shutdown.py",
+        "project_management/scripts/check_manifest.py",
+        "project_management/scripts/check_cact_coverage.py",
+        "project_management/scripts/task_counter.py",
+        "project_management/scripts/hash_util.py",
+        "project_management/scripts/cact_build.py",
+        "project_management/scripts/cact_walk.py",
+        "project_management/scripts/cact_update.py"
+      ],
+      "content_hash": "8328ab0c381e2ee1b5c4dc44fdfa8a5cec3593fc66a6104ae27fdae3925fc29d",
+      "summary": "(summary pending \u2014 run without --no-api to generate)",
+      "stale": true
+    },
+    "project_management/scripts/floor.py": {
+      "node_type": "source",
+      "file_path": "project_management/scripts/floor.py",
+      "content_hash": "94b3d444b30034b2e2e8d759335bcf63923fe8d9ab0d838f0736ca0a86fe2554"
+    },
+    "project_management/scripts/shutdown.py": {
+      "node_type": "source",
+      "file_path": "project_management/scripts/shutdown.py",
+      "content_hash": "28bf66ffea30e6ebeb602b3bc402013ee357054cb54f10db7acbadaf3d973461"
+    },
+    "project_management/scripts/check_manifest.py": {
+      "node_type": "source",
+      "file_path": "project_management/scripts/check_manifest.py",
+      "content_hash": "46adcf75ef9b1754c2e894b3a1eac76ffe8b1bec8e6118f01e8321d4c900cde4"
+    },
+    "project_management/scripts/check_cact_coverage.py": {
+      "node_type": "source",
+      "file_path": "project_management/scripts/check_cact_coverage.py",
+      "content_hash": "e26209c0b3da8b377397b7c95a9248cd15e3fbef044b6cf89c79a6498d435595"
+    },
+    "project_management/scripts/task_counter.py": {
+      "node_type": "source",
+      "file_path": "project_management/scripts/task_counter.py",
+      "content_hash": "1b2eeb2da40fb01dc41304045202e6e8e124480c0726262da3a07d7880d8cb80"
+    },
+    "project_management/scripts/hash_util.py": {
+      "node_type": "source",
+      "file_path": "project_management/scripts/hash_util.py",
+      "content_hash": "402fcf42a66a14395cbc34e1b471bf6ee4b226d2d25e8ae75872b4ee9e845350"
+    },
+    "project_management/scripts/cact_build.py": {
+      "node_type": "source",
+      "file_path": "project_management/scripts/cact_build.py",
+      "content_hash": "d737f7090c9066bc03fe8ef4ff43c7f79ac489c823e7591a0c9214d45df60fa0"
+    },
+    "project_management/scripts/cact_walk.py": {
+      "node_type": "source",
+      "file_path": "project_management/scripts/cact_walk.py",
+      "content_hash": "7676f7fea015baa6af9fa75b9803e154022fcb6243b353be0d849e2b1c1223fa"
+    },
+    "project_management/scripts/cact_update.py": {
+      "node_type": "source",
+      "file_path": "project_management/scripts/cact_update.py",
+      "content_hash": "03698f567e0d70591bad856ebac1ab1c47aacb09bdaeb951895b829785080645"
+    },
+    "project_management/standards": {
+      "node_type": "directory",
+      "children": [
+        "project_management/standards/architecture.md",
+        "project_management/standards/style.md"
+      ],
+      "content_hash": "9d2a586d2cb56d463742316c12ea48909ae8d6756f47ff24c8e4c0be2f1f5f91",
+      "summary": "(summary pending \u2014 run without --no-api to generate)",
+      "stale": true
+    },
+    "project_management/standards/architecture.md": {
+      "node_type": "explanation",
+      "file_path": "project_management/standards/architecture.md",
+      "content_hash": "1e355b7cbe673b00f68c03057a48d0d914b5bb27cfebfc1c224804978b999de5"
+    },
+    "project_management/standards/style.md": {
+      "node_type": "explanation",
+      "file_path": "project_management/standards/style.md",
+      "content_hash": "01d0644c7326f519761cf0d66c7a9d9b1daf7ce804977cebb6446ee020239a9c"
+    },
+    "project_management/governance": {
+      "node_type": "directory",
+      "children": [
+        "project_management/governance/CLAUDE.md",
+        "project_management/governance/manifest.md",
+        "project_management/governance/prompting.md"
+      ],
+      "content_hash": "10beb3e730d1097d6e80d26dcccf78a398d9170c5ac9bbe6a3818065f4d7be8b",
+      "summary": "(summary pending \u2014 run without --no-api to generate)",
+      "stale": true
+    },
+    "project_management/governance/CLAUDE.md": {
+      "node_type": "explanation",
+      "file_path": "CLAUDE.md",
+      "content_hash": "a51325a748c71b25ba48db93ccfedeedf08a4424231e211d9b023c122f5a0434"
+    },
+    "project_management/governance/manifest.md": {
+      "node_type": "explanation",
+      "file_path": "project_management/manifest.md",
+      "content_hash": "2951b7a9e428404d38283eee5556d33f9600ac0605144f958f0e4e47e6fe648b"
+    },
+    "project_management/governance/prompting.md": {
+      "node_type": "explanation",
+      "file_path": "project_management/prompting.md",
+      "content_hash": "27b4c757b26ee9eab1ad453f8800551c645ee2f3c12761c0b9e3234906e0eecb"
+    },
+    "project_management/prompts": {
+      "node_type": "directory",
+      "children": [
+        "project_management/prompts/architecture-check.md",
+        "project_management/prompts/implement-this.md",
+        "project_management/prompts/cact-leaf-summary.md",
+        "project_management/prompts/cact-dir-summary.md"
+      ],
+      "content_hash": "607092e25b92367518f9de0dc0fe1110434d1914944e5fa9a54dac00e4b0fc71",
+      "summary": "(summary pending \u2014 run without --no-api to generate)",
+      "stale": true
+    },
+    "project_management/prompts/architecture-check.md": {
+      "node_type": "source",
+      "file_path": "project_management/prompts/architecture-check.md",
+      "content_hash": "68c7b7fc6bb30f8d0a167c06d7ec7da56c7b5d57eed2fdb6edcf77e4b92b9fc4"
+    },
+    "project_management/prompts/implement-this.md": {
+      "node_type": "source",
+      "file_path": "project_management/prompts/implement-this.md",
+      "content_hash": "aa4e6fd10d11bd98c8d54d346f2022ad8a29f2be4b86fc73b18f4670f3bf6861"
+    },
+    "project_management/prompts/cact-leaf-summary.md": {
+      "node_type": "source",
+      "file_path": "project_management/prompts/cact-leaf-summary.md",
+      "content_hash": "90a229a78200968a91ca01f70d58694ee17fcff23811d726c3b42a6e728ff0c7"
+    },
+    "project_management/prompts/cact-dir-summary.md": {
+      "node_type": "source",
+      "file_path": "project_management/prompts/cact-dir-summary.md",
+      "content_hash": "96a51895e65e1640575ddae829edef0bbefa83bb012277b21605627aa400c2a4"
+    },
+    "project_management/status": {
+      "node_type": "directory",
+      "children": [
+        "project_management/status/status.md"
+      ],
+      "content_hash": "dbf2e75702e8db8b759a4012c5fc6dab91c8bc18efc4dd36e341ce457aebfa98",
+      "summary": "(summary pending \u2014 run without --no-api to generate)",
+      "stale": true
+    },
+    "project_management/status/status.md": {
+      "node_type": "source",
+      "file_path": "project_management/status.md",
+      "content_hash": "e53478bfa8558c561401cf952071cb01bcce41f443b7dd5ec9a7fbff1b71b3b3"
+    }
+  },
+  "cross_references": [
+    {
+      "source": "project_management/scripts/floor.py",
+      "target": "project_management/standards/architecture.md",
+      "relation": "enforced_by",
+      "note": "Checks arch gate via task counter threshold"
+    },
+    {
+      "source": "project_management/scripts/shutdown.py",
+      "target": "project_management/governance/manifest.md",
+      "relation": "enforced_by",
+      "note": "Runs manifest audit post-task"
+    },
+    {
+      "source": "project_management/scripts/floor.py",
+      "target": "project_management/governance/prompting.md",
+      "relation": "reads",
+      "note": "Injects prompting instructions into the assembled prompt"
+    }
+  ]
+}

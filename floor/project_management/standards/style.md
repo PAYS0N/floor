@@ -1,10 +1,8 @@
-<!-- Template file. Customize: fill in each project-specific section with your conventions. To disable a universal rule, move it to the "Disabled Universal Rules" section at the bottom with a rationale. -->
+<!-- Template file. Customize: fill in each project-specific section with your conventions. -->
 
 # Style Guide: [PROJECT NAME]
 
 ## Universal Rules
-
-These apply to all projects by default. To disable one, move it to the "Disabled Universal Rules" section at the bottom of this file with a written rationale.
 
 ### Code Quality
 
