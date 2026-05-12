@@ -91,7 +91,7 @@ If `claude` errors or isn't on PATH (and `--no-api` wasn't passed), print the er
 
 ### `cact check`
 
-Read-only. No writes, no LLM calls.
+Read-only for files. Only writes are for hashes, no LLM calls.
 
 1. Walk filesystem; recompute hashes.
 2. Compare against stored tree. Report:
